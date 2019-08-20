@@ -368,13 +368,18 @@ type Window_transparent_ int32
 	window_transparent_win7 WIN7玻璃窗口,需要WIN7开启特效,当前未启用.
 */
 const (
-	WINDOW_TRANSPARENT_FALSE Window_transparent_ = iota
+	WINDOW_TRANSPARENT_FALSE Window_transparent_ = iota + 0
 	WINDOW_TRANSPARENT_SHAPED
 	WINDOW_TRANSPARENT_SHADOW
 	WINDOW_TRANSPARENT_SIMPLE
 	WINDOW_TRANSPARENT_WIN7
 )
 
+//  window_transparent_false = 0,
+//window_transparent_shaped,
+//window_transparent_shadow,
+//window_transparent_simple,
+//   window_transparent_win7
 /*
 特殊ID
 	XC_ID_ROOT 根节点
@@ -514,14 +519,25 @@ button_type_ 按钮类型(用于区分功能)
 	button_type_close 窗口关闭按钮
 	button_type_min 窗口最小化按钮
 	button_type_max 窗口最大化还原按钮
+
+    //type XC_OBJECT_TYPE_EX uint32
+
+enum   XC_OBJECT_TYPE_EX {
+   xc_ex_error = -1, button_type_default = 0, button_type_radio, button_type_check,
+   button_type_close, button_type_min, button_type_max, element_type_layout
+}
+
+
 */
 const (
-	BUTTON_TYPE_DEFAULT Button_type_ = iota
-	BUTTON_TYPE_CHECK
+	//XC_EX_ERROR         Button_type_ = -1
+	BUTTON_TYPE_DEFAULT Button_type_ = iota + 0
 	BUTTON_TYPE_RADIO
+	BUTTON_TYPE_CHECK
 	BUTTON_TYPE_CLOSE
 	BUTTON_TYPE_MIN
 	BUTTON_TYPE_MAX
+	ELEMENT_TYPE_LAYOUT
 )
 
 type Button_style_ uint32
@@ -546,7 +562,7 @@ button_style_ 按钮样式(用于区分外观)
 	button_style_pane_dockV 框架窗口上边或下边码头上按钮
 */
 const (
-	BUTTON_STYLE_DEFAULT Button_style_ = iota
+	BUTTON_STYLE_DEFAULT Button_style_ = iota + 0
 	BUTTON_STYLE_CHECK
 	BUTTON_STYLE_RADIO
 	BUTTON_STYLE_SCROLLBAR_UP
@@ -930,3 +946,87 @@ type MonthCal_item_i struct {
 	nState int
 	rcItem RECT
 }
+
+//enum   xc_adjustLayout_ { xc_adjustLayout_no = 0x00, xc_adjustLayout_all = 0x01, xc_adjustLayout_self = 0x02}
+type XC_adjustLayout_ uint32
+
+const (
+	XC_ADJUSTLAYOUT_NO   XC_adjustLayout_ = 0X00
+	XC_ADJUSTLAYOUT_ALL                   = 0X01
+	XC_ADJUSTLAYOUT_SELF                  = 0X02
+)
+
+type TypeTextAlignFlags int
+
+const (
+	TextAlignFlag_left                   TypeTextAlignFlags = 0
+	TextAlignFlag_top                                       = 0
+	TextAlignFlag_left_top                                  = 0x4000
+	TextAlignFlag_center                                    = 0x1
+	TextAlignFlag_right                                     = 0x2
+	TextAlignFlag_vcenter                                   = 0x4
+	TextAlignFlag_bottom                                    = 0x8
+	TextFormatFlag_DirectionRightToLeft                     = 0x10
+	TextFormatFlag_NoWrap                                   = 0x20
+	TextFormatFlag_DirectionVertical                        = 0x40
+	TextFormatFlag_NoFitBlackBox                            = 0x80
+	TextFormatFlag_DisplayFormatControl                     = 0x100
+	TextFormatFlag_NoFontFallback                           = 0x200
+	TextFormatFlag_MeasureTrailingSpaces                    = 0x400
+	TextFormatFlag_LineLimit                                = 0x800
+	TextFormatFlag_NoClip                                   = 0x1000
+	TextTrimming_None                                       = 0
+	TextTrimming_Character                                  = 0x40000
+	TextTrimming_Word                                       = 0x80000
+	TextTrimming_EllipsisCharacter                          = 0x8000
+	TextTrimming_EllipsisWord                               = 0x10000
+	TextTrimming_EllipsisPath                               = 0x20000
+)
+
+/*
+align_left
+左侧
+
+align_right
+右侧
+
+align_center
+水平居中
+
+align_top
+顶部
+
+align_bottom
+底部
+
+align_center_v
+垂直居中
+*/
+
+type Align_flag_ int
+
+const (
+	Align_left     Align_flag_ = 0x0
+	Align_right                = 0x1
+	Align_center               = 0x2
+	Align_top                  = 0x0
+	Align_bottom               = 0x4
+	Align_center_v             = 0x8
+)
+
+/*
+enum   pane_align_ {
+   pane_align_error = -1, pane_align_left = 0, pane_align_top, pane_align_right,
+   pane_align_bottom, pane_align_center
+}
+*/
+type Pane_align_ int
+
+const (
+	Pane_align_error Pane_align_ = -1
+	Pane_align_left  Pane_align_ = iota + 0
+	Pane_align_top
+	Pane_align_right
+	Pane_align_bottom
+	Pane_align_center
+)

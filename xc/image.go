@@ -6,37 +6,37 @@ import (
 )
 
 var (
-	xImage_LoadFile                *syscall.Proc
-	xImage_LoadFileAdaptive        *syscall.Proc
-	xImage_LoadFileRect            *syscall.Proc
-	xImage_LoadResAdaptive         *syscall.Proc
-	xImage_LoadRes                 *syscall.Proc
-	xImage_LoadZip                 *syscall.Proc
-	xImage_LoadZipAdaptive         *syscall.Proc
-	xImage_LoadZipRect             *syscall.Proc
-	xImage_LoadMemory              *syscall.Proc
-	xImage_LoadMemoryRect          *syscall.Proc
-	xImage_LoadMemoryAdaptive      *syscall.Proc
-	xImage_LoadFromImage           *syscall.Proc
-	xImage_LoadFileFromExtractIcon *syscall.Proc
-	xImage_LoadFileFromHICON       *syscall.Proc
-	xImage_LoadFileFromHBITMAP     *syscall.Proc
-	xImage_IsStretch               *syscall.Proc
-	xImage_IsAdaptive              *syscall.Proc
-	xImage_IsTile                  *syscall.Proc
-	xImage_SetDrawType             *syscall.Proc
-	xImage_SetDrawTypeAdaptive     *syscall.Proc
-	xImage_SetTranColor            *syscall.Proc
-	xImage_SetTranColorEx          *syscall.Proc
-	xImage_EnableTranColor         *syscall.Proc
-	xImage_EnableAutoDestroy       *syscall.Proc
-	xImage_EnableCenter            *syscall.Proc
-	xImage_IsCenter                *syscall.Proc
-	xImage_GetDrawType             *syscall.Proc
-	xImage_GetWidth                *syscall.Proc
-	xImage_GetHeight               *syscall.Proc
-	xImage_Release                 *syscall.Proc
-	xImage_Destroy                 *syscall.Proc
+	xImage_LoadFile           *syscall.Proc
+	xImage_LoadFileAdaptive   *syscall.Proc
+	xImage_LoadFileRect       *syscall.Proc
+	xImage_LoadResAdaptive    *syscall.Proc
+	xImage_LoadRes            *syscall.Proc
+	xImage_LoadZip            *syscall.Proc
+	xImage_LoadZipAdaptive    *syscall.Proc
+	xImage_LoadZipRect        *syscall.Proc
+	xImage_LoadMemory         *syscall.Proc
+	xImage_LoadMemoryRect     *syscall.Proc
+	xImage_LoadMemoryAdaptive *syscall.Proc
+	xImage_LoadFromImage      *syscall.Proc
+	//	xImage_LoadFileFromExtractIcon *syscall.Proc
+	//	xImage_LoadFileFromHICON   *syscall.Proc
+	//	xImage_LoadFileFromHBITMAP *syscall.Proc
+	xImage_IsStretch           *syscall.Proc
+	xImage_IsAdaptive          *syscall.Proc
+	xImage_IsTile              *syscall.Proc
+	xImage_SetDrawType         *syscall.Proc
+	xImage_SetDrawTypeAdaptive *syscall.Proc
+	xImage_SetTranColor        *syscall.Proc
+	xImage_SetTranColorEx      *syscall.Proc
+	xImage_EnableTranColor     *syscall.Proc
+	xImage_EnableAutoDestroy   *syscall.Proc
+	xImage_EnableCenter        *syscall.Proc
+	xImage_IsCenter            *syscall.Proc
+	xImage_GetDrawType         *syscall.Proc
+	xImage_GetWidth            *syscall.Proc
+	xImage_GetHeight           *syscall.Proc
+	xImage_Release             *syscall.Proc
+	xImage_Destroy             *syscall.Proc
 )
 
 func init() {
@@ -52,9 +52,9 @@ func init() {
 	xImage_LoadMemoryRect = xcDLL.MustFindProc("XImage_LoadMemoryRect")
 	xImage_LoadMemoryAdaptive = xcDLL.MustFindProc("XImage_LoadMemoryAdaptive")
 	xImage_LoadFromImage = xcDLL.MustFindProc("XImage_LoadFromImage")
-	xImage_LoadFileFromExtractIcon = xcDLL.MustFindProc("XImage_LoadFileFromExtractIcon")
-	xImage_LoadFileFromHICON = xcDLL.MustFindProc("XImage_LoadFileFromHICON")
-	xImage_LoadFileFromHBITMAP = xcDLL.MustFindProc("XImage_LoadFileFromHBITMAP")
+	//	xImage_LoadFileFromExtractIcon = xcDLL.MustFindProc("XImage_LoadFileFromExtractIcon")
+	//	xImage_LoadFileFromHICON = xcDLL.MustFindProc("XImage_LoadFileFromHICON")
+	//	xImage_LoadFileFromHBITMAP = xcDLL.MustFindProc("XImage_LoadFileFromHBITMAP")
 	xImage_IsStretch = xcDLL.MustFindProc("XImage_IsStretch")
 	xImage_IsAdaptive = xcDLL.MustFindProc("XImage_IsAdaptive")
 	xImage_IsTile = xcDLL.MustFindProc("XImage_IsTile")
@@ -365,15 +365,15 @@ func XImage_LoadFromImage(pImage uintptr) HIMAGE {
 返回:
 	成功返回炫彩图片句柄,失败返回FALSE.
 */
-func XImage_LoadFileFromExtractIcon(pImageName string) HIMAGE {
-	// ret, _, _ := xImage_LoadFileFromExtractIcon.Call(uintptr(unsafe.Pointer(pImageName)))
-	ret, _, _ := xImage_LoadFileFromExtractIcon.Call(StringToUintPtr(pImageName))
-	if ret == FALSE {
-		return 0
-	}
+//func XImage_LoadFileFromExtractIcon(pImageName string) HIMAGE {
+//	// ret, _, _ := xImage_LoadFileFromExtractIcon.Call(uintptr(unsafe.Pointer(pImageName)))
+//	ret, _, _ := xImage_LoadFileFromExtractIcon.Call(StringToUintPtr(pImageName))
+//	if ret == FALSE {
+//		return 0
+//	}
 
-	return HIMAGE(ret)
-}
+//	return HIMAGE(ret)
+//}
 
 /*
 创建一个炫彩图片句柄,从一个现有的图标句柄HICON.
@@ -383,14 +383,14 @@ func XImage_LoadFileFromExtractIcon(pImageName string) HIMAGE {
 返回:
 	成功返回炫彩图片句柄,失败返回FALSE.
 */
-func XImage_LoadFileFromHICON(hIcon HICON) HIMAGE {
-	ret, _, _ := xImage_LoadFileFromHICON.Call(uintptr(hIcon))
-	if ret == FALSE {
-		return 0
-	}
+//func XImage_LoadFileFromHICON(hIcon HICON) HIMAGE {
+//	ret, _, _ := xImage_LoadFileFromHICON.Call(uintptr(hIcon))
+//	if ret == FALSE {
+//		return 0
+//	}
 
-	return HIMAGE(ret)
-}
+//	return HIMAGE(ret)
+//}
 
 /*
 创建一个炫彩图片句柄,从一个现有的位图句柄HBITMAP.
@@ -400,14 +400,14 @@ func XImage_LoadFileFromHICON(hIcon HICON) HIMAGE {
 返回:
 	成功返回炫彩图片句柄,失败返回FALSE.
 */
-func XImage_LoadFileFromHBITMAP(hBitmap HBITMAP) HIMAGE {
-	ret, _, _ := xImage_LoadFileFromHBITMAP.Call(uintptr(hBitmap))
-	if ret == FALSE {
-		return 0
-	}
+//func XImage_LoadFileFromHBITMAP(hBitmap HBITMAP) HIMAGE {
+//	ret, _, _ := xImage_LoadFileFromHBITMAP.Call(uintptr(hBitmap))
+//	if ret == FALSE {
+//		return 0
+//	}
 
-	return HIMAGE(ret)
-}
+//	return HIMAGE(ret)
+//}
 
 /*
 是否为拉伸图片句柄

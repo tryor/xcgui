@@ -7,30 +7,30 @@ import (
 
 var (
 	// Functions
-	xEle_Create                     *syscall.Proc
-	xEle_RegEventC                  *syscall.Proc
-	xEle_RegEventC1                 *syscall.Proc
-	xEle_RegEventC2                 *syscall.Proc
-	xEle_RemoveEventC               *syscall.Proc
-	xEle_SendEvent                  *syscall.Proc
-	xEle_PostEvent                  *syscall.Proc
-	xEle_GetRect                    *syscall.Proc
-	xEle_GetRectLogic               *syscall.Proc
-	xEle_GetClientRect              *syscall.Proc
-	xEle_GetWidth                   *syscall.Proc
-	xEle_GetHeight                  *syscall.Proc
-	xEle_RectWndClientToEleClient   *syscall.Proc
-	xEle_PointWndClientToEleClient  *syscall.Proc
-	xEle_RectClientToWndClient      *syscall.Proc
-	xEle_PointClientToWndClient     *syscall.Proc
-	xEle_GetWndClientRect           *syscall.Proc
-	xEle_GetType                    *syscall.Proc
-	xEle_GetHWND                    *syscall.Proc
-	xEle_GetHWINDOW                 *syscall.Proc
-	xEle_GetCursor                  *syscall.Proc
-	xEle_SetCursor                  *syscall.Proc
-	xEle_AddEle                     *syscall.Proc
-	xEle_InsertEle                  *syscall.Proc
+	xEle_Create                    *syscall.Proc
+	xEle_RegEventC                 *syscall.Proc
+	xEle_RegEventC1                *syscall.Proc
+	xEle_RegEventC2                *syscall.Proc
+	xEle_RemoveEventC              *syscall.Proc
+	xEle_SendEvent                 *syscall.Proc
+	xEle_PostEvent                 *syscall.Proc
+	xEle_GetRect                   *syscall.Proc
+	xEle_GetRectLogic              *syscall.Proc
+	xEle_GetClientRect             *syscall.Proc
+	xEle_GetWidth                  *syscall.Proc
+	xEle_GetHeight                 *syscall.Proc
+	xEle_RectWndClientToEleClient  *syscall.Proc
+	xEle_PointWndClientToEleClient *syscall.Proc
+	xEle_RectClientToWndClient     *syscall.Proc
+	xEle_PointClientToWndClient    *syscall.Proc
+	xEle_GetWndClientRect          *syscall.Proc
+	xEle_GetType                   *syscall.Proc
+	xEle_GetHWND                   *syscall.Proc
+	xEle_GetHWINDOW                *syscall.Proc
+	xEle_GetCursor                 *syscall.Proc
+	xEle_SetCursor                 *syscall.Proc
+	//	xEle_AddEle                     *syscall.Proc
+	//	xEle_InsertEle                  *syscall.Proc
 	xEle_ShowEle                    *syscall.Proc
 	xEle_SetRect                    *syscall.Proc
 	xEle_SetRectEx                  *syscall.Proc
@@ -60,49 +60,60 @@ var (
 	xEle_GetParentEle               *syscall.Proc
 	xEle_GetParent                  *syscall.Proc
 	xEle_RemoveEle                  *syscall.Proc
-	xEle_AddShape                   *syscall.Proc
-	xEle_SetZOrder                  *syscall.Proc
-	xEle_SetZOrderEx                *syscall.Proc
-	xEle_RedrawEle                  *syscall.Proc
-	xEle_RedrawRect                 *syscall.Proc
-	xEle_GetChildCount              *syscall.Proc
-	xEle_GetChildByIndex            *syscall.Proc
-	xEle_GetChildByID               *syscall.Proc
-	xEle_GetChildShapeCount         *syscall.Proc
-	xEle_GetChildShapeByIndex       *syscall.Proc
-	xEle_SetTextColor               *syscall.Proc
-	xEle_GetTextColor               *syscall.Proc
-	xEle_SetFocusBorderColor        *syscall.Proc
-	xEle_GetFocusBorderColor        *syscall.Proc
-	xEle_SetFont                    *syscall.Proc
-	xEle_GetFont                    *syscall.Proc
-	xEle_SetAlpha                   *syscall.Proc
-	xEle_Destroy                    *syscall.Proc
-	xEle_AddBkBorder                *syscall.Proc
-	xEle_AddBkFill                  *syscall.Proc
-	xEle_AddBkImage                 *syscall.Proc
-	xEle_GetBkInfoCount             *syscall.Proc
-	xEle_ClearBkInfo                *syscall.Proc
-	xEle_GetBkInfoManager           *syscall.Proc
-	xEle_GetStateFlags              *syscall.Proc
-	xEle_DrawFocus                  *syscall.Proc
-	xEle_BindLayoutObject           *syscall.Proc
-	xEle_GetLayoutObject            *syscall.Proc
-	xEle_GetParentLayoutObject      *syscall.Proc
-	xEle_SetUserData                *syscall.Proc
-	xEle_GetUserData                *syscall.Proc
-	xEle_GetContentSize             *syscall.Proc
-	xEle_SetCapture                 *syscall.Proc
-	xEle_SetLayoutWidth             *syscall.Proc
-	xEle_SetLayoutHeight            *syscall.Proc
-	xEle_GetLayoutWidth             *syscall.Proc
-	xEle_GetLayoutHeight            *syscall.Proc
-	xEle_EnableTransparentChannel   *syscall.Proc
-	xEle_SetToolTip                 *syscall.Proc
-	xEle_GetToolTip                 *syscall.Proc
-	xEle_EnableToolTip              *syscall.Proc
-	xEle_AdjustLayoutObject         *syscall.Proc
-	xEle_AdjustLayout               *syscall.Proc
+	//	xEle_AddShape                   *syscall.Proc
+	xEle_SetZOrder       *syscall.Proc
+	xEle_SetZOrderEx     *syscall.Proc
+	xEle_RedrawEle       *syscall.Proc
+	xEle_RedrawRect      *syscall.Proc
+	xEle_GetChildCount   *syscall.Proc
+	xEle_GetChildByIndex *syscall.Proc
+	xEle_GetChildByID    *syscall.Proc
+	//	xEle_GetChildShapeCount       *syscall.Proc
+	//	xEle_GetChildShapeByIndex     *syscall.Proc
+	xEle_SetTextColor        *syscall.Proc
+	xEle_GetTextColor        *syscall.Proc
+	xEle_SetFocusBorderColor *syscall.Proc
+	xEle_GetFocusBorderColor *syscall.Proc
+	xEle_SetFont             *syscall.Proc
+	xEle_GetFont             *syscall.Proc
+	xEle_SetAlpha            *syscall.Proc
+	xEle_Destroy             *syscall.Proc
+	xEle_AddBkBorder         *syscall.Proc
+	xEle_AddBkFill           *syscall.Proc
+	xEle_AddBkImage          *syscall.Proc
+	xEle_GetBkInfoCount      *syscall.Proc
+	xEle_ClearBkInfo         *syscall.Proc
+	//	xEle_GetBkInfoManager         *syscall.Proc
+	xEle_GetStateFlags *syscall.Proc
+	xEle_DrawFocus     *syscall.Proc
+	//	xEle_BindLayoutObject         *syscall.Proc
+	//	xEle_GetLayoutObject          *syscall.Proc
+	//	xEle_GetParentLayoutObject    *syscall.Proc
+	xEle_SetUserData              *syscall.Proc
+	xEle_GetUserData              *syscall.Proc
+	xEle_GetContentSize           *syscall.Proc
+	xEle_SetCapture               *syscall.Proc
+	xEle_SetLayoutWidth           *syscall.Proc
+	xEle_SetLayoutHeight          *syscall.Proc
+	xEle_GetLayoutWidth           *syscall.Proc
+	xEle_GetLayoutHeight          *syscall.Proc
+	xEle_EnableTransparentChannel *syscall.Proc
+	xEle_SetToolTip               *syscall.Proc
+	xEle_GetToolTip               *syscall.Proc
+	//	xEle_EnableToolTip            *syscall.Proc
+	//	xEle_AdjustLayoutObject *syscall.Proc
+	xEle_AdjustLayout *syscall.Proc
+
+	xEle_SetWidth  *syscall.Proc
+	xEle_SetHeight *syscall.Proc
+
+	xEle_SetBorderSize    *syscall.Proc
+	xEle_EnableDrawBorder *syscall.Proc
+
+	xEle_SetPadding *syscall.Proc
+	xEle_GetPadding *syscall.Proc
+
+//	xEle_SetLayoutWidth *syscall.Proc
 )
 
 func init() {
@@ -129,8 +140,8 @@ func init() {
 	xEle_GetHWINDOW = xcDLL.MustFindProc("XEle_GetHWINDOW")
 	xEle_GetCursor = xcDLL.MustFindProc("XEle_GetCursor")
 	xEle_SetCursor = xcDLL.MustFindProc("XEle_SetCursor")
-	xEle_AddEle = xcDLL.MustFindProc("XEle_AddEle")
-	xEle_InsertEle = xcDLL.MustFindProc("XEle_InsertEle")
+	//	xEle_AddEle = xcDLL.MustFindProc("XEle_AddEle")
+	//	xEle_InsertEle = xcDLL.MustFindProc("XEle_InsertEle")
 	xEle_ShowEle = xcDLL.MustFindProc("XEle_ShowEle")
 	xEle_SetRect = xcDLL.MustFindProc("XEle_SetRect")
 	xEle_SetRectEx = xcDLL.MustFindProc("XEle_SetRectEx")
@@ -160,7 +171,7 @@ func init() {
 	xEle_GetParentEle = xcDLL.MustFindProc("XEle_GetParentEle")
 	xEle_GetParent = xcDLL.MustFindProc("XEle_GetParent")
 	xEle_RemoveEle = xcDLL.MustFindProc("XEle_RemoveEle")
-	xEle_AddShape = xcDLL.MustFindProc("XEle_AddShape")
+	//	xEle_AddShape = xcDLL.MustFindProc("XEle_AddShape")
 	xEle_SetZOrder = xcDLL.MustFindProc("XEle_SetZOrder")
 	xEle_SetZOrderEx = xcDLL.MustFindProc("XEle_SetZOrderEx")
 	xEle_RedrawEle = xcDLL.MustFindProc("XEle_RedrawEle")
@@ -168,8 +179,8 @@ func init() {
 	xEle_GetChildCount = xcDLL.MustFindProc("XEle_GetChildCount")
 	xEle_GetChildByIndex = xcDLL.MustFindProc("XEle_GetChildByIndex")
 	xEle_GetChildByID = xcDLL.MustFindProc("XEle_GetChildByID")
-	xEle_GetChildShapeCount = xcDLL.MustFindProc("XEle_GetChildShapeCount")
-	xEle_GetChildShapeByIndex = xcDLL.MustFindProc("XEle_GetChildShapeByIndex")
+	//	xEle_GetChildShapeCount = xcDLL.MustFindProc("XEle_GetChildShapeCount")
+	//	xEle_GetChildShapeByIndex = xcDLL.MustFindProc("XEle_GetChildShapeByIndex")
 	xEle_SetTextColor = xcDLL.MustFindProc("XEle_SetTextColor")
 	xEle_GetTextColor = xcDLL.MustFindProc("XEle_GetTextColor")
 	xEle_SetFocusBorderColor = xcDLL.MustFindProc("XEle_SetFocusBorderColor")
@@ -183,12 +194,12 @@ func init() {
 	xEle_AddBkImage = xcDLL.MustFindProc("XEle_AddBkImage")
 	xEle_GetBkInfoCount = xcDLL.MustFindProc("XEle_GetBkInfoCount")
 	xEle_ClearBkInfo = xcDLL.MustFindProc("XEle_ClearBkInfo")
-	xEle_GetBkInfoManager = xcDLL.MustFindProc("XEle_GetBkInfoManager")
+	//	xEle_GetBkInfoManager = xcDLL.MustFindProc("XEle_GetBkInfoManager")
 	xEle_GetStateFlags = xcDLL.MustFindProc("XEle_GetStateFlags")
 	xEle_DrawFocus = xcDLL.MustFindProc("XEle_DrawFocus")
-	xEle_BindLayoutObject = xcDLL.MustFindProc("XEle_BindLayoutObject")
-	xEle_GetLayoutObject = xcDLL.MustFindProc("XEle_GetLayoutObject")
-	xEle_GetParentLayoutObject = xcDLL.MustFindProc("XEle_GetParentLayoutObject")
+	//	xEle_BindLayoutObject = xcDLL.MustFindProc("XEle_BindLayoutObject")
+	//	xEle_GetLayoutObject = xcDLL.MustFindProc("XEle_GetLayoutObject")
+	//	xEle_GetParentLayoutObject = xcDLL.MustFindProc("XEle_GetParentLayoutObject")
 	xEle_SetUserData = xcDLL.MustFindProc("XEle_SetUserData")
 	xEle_GetUserData = xcDLL.MustFindProc("XEle_GetUserData")
 	xEle_GetContentSize = xcDLL.MustFindProc("XEle_GetContentSize")
@@ -200,9 +211,52 @@ func init() {
 	xEle_EnableTransparentChannel = xcDLL.MustFindProc("XEle_EnableTransparentChannel")
 	xEle_SetToolTip = xcDLL.MustFindProc("XEle_SetToolTip")
 	xEle_GetToolTip = xcDLL.MustFindProc("XEle_GetToolTip")
-	xEle_EnableToolTip = xcDLL.MustFindProc("XEle_EnableToolTip")
-	xEle_AdjustLayoutObject = xcDLL.MustFindProc("XEle_AdjustLayoutObject")
+	//	xEle_EnableToolTip = xcDLL.MustFindProc("XEle_EnableToolTip")
+	//	xEle_AdjustLayoutObject = xcDLL.MustFindProc("XEle_AdjustLayoutObject")
 	xEle_AdjustLayout = xcDLL.MustFindProc("XEle_AdjustLayout")
+
+	xEle_SetWidth = xcDLL.MustFindProc("XEle_SetWidth")
+	xEle_SetHeight = xcDLL.MustFindProc("XEle_SetHeight")
+	xEle_SetBorderSize = xcDLL.MustFindProc("XEle_SetBorderSize")
+	xEle_EnableDrawBorder = xcDLL.MustFindProc("XEle_EnableDrawBorder")
+
+	xEle_SetPadding = xcDLL.MustFindProc("XEle_SetPadding")
+	//	xEle_SetLayoutWidth = xcDLL.MustFindProc("XEle_SetLayoutWidth")
+
+	xEle_GetPadding = xcDLL.MustFindProc("XEle_GetPadding")
+}
+
+//XEle_SetLayoutWidth (HELE hEle, layout_size_type_ nType, int nWidth)
+//func XEle_SetLayoutWidth(hEle HELE, nType Layout_size_type_, nWidth int) {
+//	xEle_SetLayoutWidth.Call(uintptr(hEle), uintptr(nType), uintptr(nWidth))
+//}
+
+func XEle_SetPadding(hEle HELE, left, top, right, bottom int) {
+	xEle_SetPadding.Call(uintptr(hEle), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom))
+}
+
+func XEle_GetPadding(hEle HELE, paddingSize *BorderSize_) {
+	xEle_GetPadding.Call(uintptr(hEle), uintptr(unsafe.Pointer(paddingSize)))
+}
+
+//XEle_EnableDrawBorder (HELE hEle, BOOL bEnable)
+func XEle_EnableDrawBorder(hEle HELE, bEnable bool) {
+	xEle_EnableDrawBorder.Call(uintptr(hEle), uintptr(BoolToBOOL(bEnable)))
+}
+
+// XEle_SetBorderSize (HELE hEle, int left, int top, int right, int bottom)
+func XEle_SetBorderSize(hEle HELE, left, top, right, bottom int) {
+	xEle_SetBorderSize.Call(uintptr(hEle), uintptr(left), uintptr(top), uintptr(right), uintptr(bottom))
+}
+
+func XEle_SetWidth(hEle HELE, nWidth int) {
+	xEle_SetWidth.Call(uintptr(hEle),
+		uintptr(nWidth))
+
+}
+func XEle_SetHeight(hEle HELE, nHeight int) {
+	xEle_SetHeight.Call(uintptr(hEle),
+		uintptr(nHeight))
 }
 
 /*
@@ -548,13 +602,13 @@ func XEle_SetCursor(hEle HELE, hCursor HCURSOR) {
 返回:
 	如果成功返回TRUE,否则相反.
 */
-func XEle_AddEle(hEle, hChildEle HELE) bool {
-	ret, _, _ := xEle_AddEle.Call(
-		uintptr(hEle),
-		uintptr(hChildEle))
+//func XEle_AddEle(hEle, hChildEle HELE) bool {
+//	ret, _, _ := xEle_AddEle.Call(
+//		uintptr(hEle),
+//		uintptr(hChildEle))
 
-	return ret == TRUE
-}
+//	return ret == TRUE
+//}
 
 /*
 插入元素到目标元素前面.
@@ -566,14 +620,14 @@ func XEle_AddEle(hEle, hChildEle HELE) bool {
 返回:
 	成功返回TRUE否则返回FALSE.
 */
-func XEle_InsertEle(hEle, hChildEle, hDestEle HELE) bool {
-	ret, _, _ := xEle_InsertEle.Call(
-		uintptr(hEle),
-		uintptr(hChildEle),
-		uintptr(hDestEle))
+//func XEle_InsertEle(hEle, hChildEle, hDestEle HELE) bool {
+//	ret, _, _ := xEle_InsertEle.Call(
+//		uintptr(hEle),
+//		uintptr(hChildEle),
+//		uintptr(hDestEle))
 
-	return ret == TRUE
-}
+//	return ret == TRUE
+//}
 
 /*
 显示隐藏元素.
@@ -598,11 +652,12 @@ func XEle_ShowEle(hEle HELE, bShow bool) {
 返回:
 	如果坐标未改变返回FALSE,否则相反.
 */
-func XEle_SetRect(hEle HELE, pRect *RECT, bRedraw bool) bool {
+func XEle_SetRect(hEle HELE, pRect *RECT, bRedraw bool, nFlags XC_adjustLayout_) bool {
 	ret, _, _ := xEle_SetRect.Call(
 		uintptr(hEle),
 		uintptr(unsafe.Pointer(pRect)),
-		uintptr(BoolToBOOL(bRedraw)))
+		uintptr(BoolToBOOL(bRedraw)),
+		uintptr(nFlags))
 
 	return ret == FALSE
 }
@@ -620,14 +675,16 @@ func XEle_SetRect(hEle HELE, pRect *RECT, bRedraw bool) bool {
 返回:
 	如果坐标未改变返回FALSE,否则相反.
 */
-func XEle_SetRectEx(hEle HELE, x, y, cx, cy int, bRedraw bool) bool {
+func XEle_SetRectEx(hEle HELE, x, y, cx, cy int, bRedraw bool, nFlags XC_adjustLayout_) bool {
 	ret, _, _ := xEle_SetRectEx.Call(
 		uintptr(hEle),
 		uintptr(x),
 		uintptr(y),
 		uintptr(cx),
 		uintptr(cy),
-		uintptr(BoolToBOOL(bRedraw)))
+		uintptr(BoolToBOOL(bRedraw)),
+		uintptr(nFlags),
+	)
 
 	return ret == TRUE
 }
@@ -999,13 +1056,13 @@ func XEle_RemoveEle(hEle HELE) {
 返回:
 	成功返回TRUE否则返回FALSE.
 */
-func XEle_AddShape(hEle HELE, hShape HXCGUI) bool {
-	ret, _, _ := xEle_AddShape.Call(
-		uintptr(hEle),
-		uintptr(hShape))
+//func XEle_AddShape(hEle HELE, hShape HXCGUI) bool {
+//	ret, _, _ := xEle_AddShape.Call(
+//		uintptr(hEle),
+//		uintptr(hShape))
 
-	return ret == TRUE
-}
+//	return ret == TRUE
+//}
 
 /*
 设置元素Z序.
@@ -1049,8 +1106,12 @@ func XEle_SetZOrderEx(hEle, hDestEle HELE, nType int) bool {
 参数:
 	hEle 元素句柄.
 */
-func XEle_RedrawEle(hEle HELE) {
-	xEle_RedrawEle.Call(uintptr(hEle))
+func XEle_RedrawEle(hEle HELE, b bool) {
+	var bImmediate = uintptr(FALSE)
+	if b {
+		bImmediate = uintptr(TRUE)
+	}
+	xEle_RedrawEle.Call(uintptr(hEle), bImmediate)
 }
 
 /*
@@ -1122,11 +1183,11 @@ func XEle_GetChildByID(hEle HELE, id int) HELE {
 返回:
 	形状对象数量.
 */
-func XEle_GetChildShapeCount(hEle HELE) int {
-	ret, _, _ := xEle_GetChildShapeCount.Call(uintptr(hEle))
+//func XEle_GetChildShapeCount(hEle HELE) int {
+//	ret, _, _ := xEle_GetChildShapeCount.Call(uintptr(hEle))
 
-	return int(ret)
-}
+//	return int(ret)
+//}
 
 /*
 通过索引返回形状对象句柄.
@@ -1137,13 +1198,13 @@ func XEle_GetChildShapeCount(hEle HELE) int {
 返回:
 	返回形状对象句柄.
 */
-func XEle_GetChildShapeByIndex(hEle HELE, index int) HXCGUI {
-	ret, _, _ := xEle_GetChildShapeByIndex.Call(
-		uintptr(hEle),
-		uintptr(index))
+//func XEle_GetChildShapeByIndex(hEle HELE, index int) HXCGUI {
+//	ret, _, _ := xEle_GetChildShapeByIndex.Call(
+//		uintptr(hEle),
+//		uintptr(index))
 
-	return HXCGUI(ret)
-}
+//	return HXCGUI(ret)
+//}
 
 /*
 设置文本颜色.
@@ -1330,11 +1391,11 @@ func XEle_ClearBkInfo(hEle HELE) {
 返回:
 	背景内容管理器.
 */
-func XEle_GetBkInfoManager(hEle HELE) HBKINFOM {
-	ret, _, _ := xEle_GetBkInfoManager.Call(uintptr(hEle))
+//func XEle_GetBkInfoManager(hEle HELE) HBKINFOM {
+//	ret, _, _ := xEle_GetBkInfoManager.Call(uintptr(hEle))
 
-	return HBKINFOM(ret)
-}
+//	return HBKINFOM(ret)
+//}
 
 /*
 获取组合状态.
@@ -1376,11 +1437,11 @@ func XEle_DrawFocus(hEle HELE, hDraw HDRAW, pRect *RECT) bool {
 	hEle 元素句柄.
 	hLayout 布局对象句柄.
 */
-func XEle_BindLayoutObject(hEle HELE, hLayout HXCGUI) {
-	xEle_BindLayoutObject.Call(
-		uintptr(hEle),
-		uintptr(hLayout))
-}
+//func XEle_BindLayoutObject(hEle HELE, hLayout HXCGUI) {
+//	xEle_BindLayoutObject.Call(
+//		uintptr(hEle),
+//		uintptr(hLayout))
+//}
 
 /*
 获取绑定的布局对象.
@@ -1390,11 +1451,11 @@ func XEle_BindLayoutObject(hEle HELE, hLayout HXCGUI) {
 返回:
 	布局对象句柄.
 */
-func XEle_GetLayoutObject(hEle HELE) HXCGUI {
-	ret, _, _ := xEle_GetLayoutObject.Call(uintptr(hEle))
+//func XEle_GetLayoutObject(hEle HELE) HXCGUI {
+//	ret, _, _ := xEle_GetLayoutObject.Call(uintptr(hEle))
 
-	return HXCGUI(ret)
-}
+//	return HXCGUI(ret)
+//}
 
 /*
 获取父布局对象.
@@ -1404,11 +1465,11 @@ func XEle_GetLayoutObject(hEle HELE) HXCGUI {
 返回:
 	布局对象句柄.
 */
-func XEle_GetParentLayoutObject(hEle HELE) HXCGUI {
-	ret, _, _ := xEle_GetParentLayoutObject.Call(uintptr(hEle))
+//func XEle_GetParentLayoutObject(hEle HELE) HXCGUI {
+//	ret, _, _ := xEle_GetParentLayoutObject.Call(uintptr(hEle))
 
-	return HXCGUI(ret)
-}
+//	return HXCGUI(ret)
+//}
 
 /*
 设置用户数据.
@@ -1571,11 +1632,11 @@ func XEle_GetToolTip(hEle HELE, pOut *uint16, nOutLen int) {
 	hEle 元素句柄.
 	bEnable 是否启用.
 */
-func XEle_EnableToolTip(hEle HELE, bEnable bool) {
-	xEle_EnableToolTip.Call(
-		uintptr(hEle),
-		uintptr(BoolToBOOL(bEnable)))
-}
+//func XEle_EnableToolTip(hEle HELE, bEnable bool) {
+//	xEle_EnableToolTip.Call(
+//		uintptr(hEle),
+//		uintptr(BoolToBOOL(bEnable)))
+//}
 
 /*
 调整布局对象.
@@ -1583,9 +1644,9 @@ func XEle_EnableToolTip(hEle HELE, bEnable bool) {
 参数:
 	hEle 元素句柄.
 */
-func XEle_AdjustLayoutObject(hEle HELE) {
-	xEle_AdjustLayoutObject.Call(uintptr(hEle))
-}
+//func XEle_AdjustLayoutObject(hEle HELE) {
+//	xEle_AdjustLayoutObject.Call(uintptr(hEle))
+//}
 
 /*
 调整布局.

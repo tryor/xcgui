@@ -5,7 +5,7 @@ import (
 )
 
 import (
-	"github.com/codyguo/xcgui/xc"
+	"github.com/tryor/xcgui/xc"
 )
 
 /* nFlags 文本对齐方式
@@ -171,12 +171,13 @@ func (b *Button) GetText() string {
 
 	pSize := new(xc.SIZE)
 	xc.XEle_GetContentSize(b.hEle, pSize)
-	textLength := pSize.CX
+	//textLength := pSize.CX
 
-	buf := make([]uint16, textLength+1)
-	xc.XBtn_GetText(b.hEle, &buf[0], int(textLength)+1)
+	return xc.XBtn_GetText(b.hEle)
 
-	return syscall.UTF16ToString(buf)
+	//buf := make([]uint16, textLength+1)
+	//xc.XBtn_GetText(b.hEle, &buf[0], int(textLength)+1)
+	//return syscall.UTF16ToString(buf)
 }
 
 func (b *Button) SetIcon(hImage xc.HIMAGE) {

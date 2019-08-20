@@ -6,16 +6,16 @@ import (
 )
 
 // Align_type_
-type Align_type_ int32
+//type Align_type_ int32
 
-const (
-	Align_error Align_type_ = -1
-	Align_left  Align_type_ = iota - 1
-	Align_top
-	Align_right
-	Align_bottom
-	// Align_center
-)
+//const (
+//	Align_error Align_type_ = -1
+//	Align_left  Align_type_ = iota - 1
+//	Align_top
+//	Align_right
+//	Align_bottom
+//	// Align_center
+//)
 
 var (
 	// Functions
@@ -154,7 +154,7 @@ func XFrameWnd_SetPaneSplitBarColor(hWindow HWINDOW, color COLORREF, alpha byte)
 返回:
 	成功返回TRUE否则返回FALSE.
 */
-func XFrameWnd_AddPane(hWindow HWINDOW, hPaneDest HELE, hPaneNew HELE, align Align_type_) bool {
+func XFrameWnd_AddPane(hWindow HWINDOW, hPaneDest HELE, hPaneNew HELE, align Pane_align_) bool {
 	ret, _, _ := xFrameWnd_AddPane.Call(
 		uintptr(hWindow),
 		uintptr(hPaneDest),

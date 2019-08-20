@@ -6,7 +6,7 @@ import (
 )
 
 import (
-	"github.com/codyguo/xcgui/xc"
+	"github.com/tryor/xcgui/xc"
 )
 
 var (

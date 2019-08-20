@@ -6,10 +6,10 @@ import (
 )
 
 var (
-	xComboBox_Create                       *syscall.Proc
-	xComboBox_SetSelItem                   *syscall.Proc
-	xComboBox_BindApapter                  *syscall.Proc
-	xComboBox_GetApapter                   *syscall.Proc
+	xComboBox_Create      *syscall.Proc
+	xComboBox_SetSelItem  *syscall.Proc
+	xComboBox_BindAdapter *syscall.Proc
+	//	xComboBox_GetAdapter                    *syscall.Proc
 	xComboBox_GetButtonRect                *syscall.Proc
 	xComboBox_SetButtonSize                *syscall.Proc
 	xComboBox_SetDropHeight                *syscall.Proc
@@ -26,13 +26,18 @@ var (
 	// xComboBox_GetBkInfoManager             *syscall.Proc
 	xComboBox_GetSelItem *syscall.Proc
 	xComboBox_GetState   *syscall.Proc
+
+	xComboBox_AddItemText    *syscall.Proc
+	xComboBox_AddItemTextEx  *syscall.Proc
+	xComboBox_SetBindName    *syscall.Proc
+	xComboBox_InsertItemText *syscall.Proc
 )
 
 func init() {
 	xComboBox_Create = xcDLL.MustFindProc("XComboBox_Create")
 	xComboBox_SetSelItem = xcDLL.MustFindProc("XComboBox_SetSelItem")
-	xComboBox_BindApapter = xcDLL.MustFindProc("XComboBox_BindApapter")
-	xComboBox_GetApapter = xcDLL.MustFindProc("XComboBox_GetApapter")
+	xComboBox_BindAdapter = xcDLL.MustFindProc("XComboBox_BindAdapter") //XComboBox_BindAdapter (HELE hEle, HXCGUI hAdapter)
+	//	xComboBox_GetAdapter  = xcDLL.MustFindProc("XComboBox_GetAdapter")
 	xComboBox_GetButtonRect = xcDLL.MustFindProc("XComboBox_GetButtonRect")
 	xComboBox_SetButtonSize = xcDLL.MustFindProc("XComboBox_SetButtonSize")
 	xComboBox_SetDropHeight = xcDLL.MustFindProc("XComboBox_SetDropHeight")
@@ -49,6 +54,36 @@ func init() {
 	xComboBox_Create = xcDLL.MustFindProc("XComboBox_Create")
 	xComboBox_GetSelItem = xcDLL.MustFindProc("XComboBox_GetSelItem")
 	xComboBox_ClearBkInfo = xcDLL.MustFindProc("XComboBox_ClearBkInfo")
+
+	xComboBox_AddItemText = xcDLL.MustFindProc("XComboBox_AddItemText")
+	xComboBox_AddItemTextEx = xcDLL.MustFindProc("XComboBox_AddItemTextEx")
+	xComboBox_SetBindName = xcDLL.MustFindProc("XComboBox_SetBindName")
+	xComboBox_InsertItemText = xcDLL.MustFindProc("XComboBox_InsertItemText")
+
+}
+
+func XComboBox_InsertItemText(hEle HELE, idx int, text string) {
+	xComboBox_InsertItemText.Call(
+		uintptr(hEle), uintptr(idx),
+		StringToUintPtr(text))
+}
+
+func XComboBox_SetBindName(hEle HELE, name string) {
+	xComboBox_SetBindName.Call(
+		uintptr(hEle),
+		StringToUintPtr(name))
+}
+
+func XComboBox_AddItemText(hEle HELE, text string) {
+	xComboBox_AddItemText.Call(
+		uintptr(hEle), StringToUintPtr(text))
+}
+
+func XComboBox_AddItemTextEx(hEle HELE, name, text string) {
+	xComboBox_AddItemTextEx.Call(
+		uintptr(hEle),
+		StringToUintPtr(name),
+		StringToUintPtr(text))
 }
 
 /*
@@ -99,8 +134,8 @@ func XComboBox_SetSelItem(hEle HELE, iIndex int) bool {
 	hEle 元素句柄.
 	hAdapter 适配器句柄.
 */
-func XComboBox_BindApapter(hEle HELE, hAdapter HXCGUI) {
-	xComboBox_BindApapter.Call(
+func XComboBox_BindAdapter(hEle HELE, hAdapter HXCGUI) {
+	xComboBox_BindAdapter.Call(
 		uintptr(hEle),
 		uintptr(hAdapter))
 }
@@ -113,11 +148,11 @@ func XComboBox_BindApapter(hEle HELE, hAdapter HXCGUI) {
 返回:
 	返回数据适配器.
 */
-func XComboBox_GetApapter(hEle HELE) HXCGUI {
-	ret, _, _ := xComboBox_GetApapter.Call(uintptr(hEle))
+//func XComboBox_GetAdapter (hEle HELE) HXCGUI {
+//	ret, _, _ := xComboBox_GetAdapter .Call(uintptr(hEle))
 
-	return HXCGUI(ret)
-}
+//	return HXCGUI(ret)
+//}
 
 /*
 获取下拉按钮坐标.
@@ -196,8 +231,8 @@ func XComboBox_SetItemTemplateXML(hEle HELE, pXmlFile string) {
 func XComboBox_SetItemTemplateXMLFromString(hEle HELE, pStringXML string) {
 	xComboBox_SetItemTemplateXMLFromString.Call(
 		uintptr(hEle),
-		StringToUintPtr(pStringXML))
-	// uintptr(unsafe.Pointer(pStringXML)))
+		//		StringToUintPtr(pStringXML))
+		uintptr(unsafe.Pointer(&[]byte(pStringXML)[0])))
 }
 
 /*

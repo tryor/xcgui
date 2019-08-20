@@ -20,6 +20,8 @@ var (
 	xShapeText_SetLayoutHeight *syscall.Proc
 	xShapeText_GetLayoutWidth  *syscall.Proc
 	xShapeText_GetLayoutHeight *syscall.Proc
+
+	xShapeText_GetFont *syscall.Proc
 )
 
 func init() {
@@ -36,6 +38,13 @@ func init() {
 	xShapeText_SetLayoutHeight = xcDLL.MustFindProc("XShapeText_SetLayoutHeight")
 	xShapeText_GetLayoutWidth = xcDLL.MustFindProc("XShapeText_GetLayoutWidth")
 	xShapeText_GetLayoutHeight = xcDLL.MustFindProc("XShapeText_GetLayoutHeight")
+
+	xShapeText_GetFont = xcDLL.MustFindProc("XShapeText_GetFont")
+}
+
+func XShapeText_GetFont(hTextBlock HXCGUI) HFONTX {
+	r, _, _ := xShapeText_GetFont.Call(uintptr(hTextBlock))
+	return HFONTX(r)
 }
 
 /*
@@ -167,7 +176,7 @@ func XShapeText_GetTextColor(hTextBlock HXCGUI) COLORREF {
 	hTextBlock 形状对象文本句柄.
 	align 文本对齐方式.
 */
-func XShapeText_SetTextAlign(hTextBlock HXCGUI, align int) {
+func XShapeText_SetTextAlign(hTextBlock HXCGUI, align TypeTextAlignFlags) {
 	xShapeText_SetTextAlign.Call(
 		uintptr(hTextBlock),
 		uintptr(align))

@@ -52,14 +52,14 @@ var (
 	xc_LoadLayoutFromString   *syscall.Proc
 	xc_LoadResource           *syscall.Proc
 	xc_LoadResourceFromString *syscall.Proc
-	xc_LoadTemplate           *syscall.Proc
-	xc_LoadTemplateFromString *syscall.Proc
-	xc_TemplateDestroy        *syscall.Proc
-	xc_GetDefaultFont         *syscall.Proc
-	xc_SetDefaultFont         *syscall.Proc
-	xc_InitFont               *syscall.Proc
-	xc_Malloc                 *syscall.Proc
-	xc_Free                   *syscall.Proc
+	//	xc_LoadTemplate           *syscall.Proc
+	//	xc_LoadTemplateFromString *syscall.Proc
+	//	xc_TemplateDestroy *syscall.Proc
+	xc_GetDefaultFont *syscall.Proc
+	xc_SetDefaultFont *syscall.Proc
+	xc_InitFont       *syscall.Proc
+	xc_Malloc         *syscall.Proc
+	xc_Free           *syscall.Proc
 )
 
 func init() {
@@ -67,9 +67,9 @@ func init() {
 	xc_LoadLayoutFromString = xcDLL.MustFindProc("XC_LoadLayoutFromString")
 	xc_LoadResource = xcDLL.MustFindProc("XC_LoadResource")
 	xc_LoadResourceFromString = xcDLL.MustFindProc("XC_LoadResourceFromString")
-	xc_LoadTemplate = xcDLL.MustFindProc("XC_LoadTemplate")
-	xc_LoadTemplateFromString = xcDLL.MustFindProc("XC_LoadTemplateFromString")
-	xc_TemplateDestroy = xcDLL.MustFindProc("XC_TemplateDestroy")
+	//	xc_LoadTemplate = xcDLL.MustFindProc("XC_LoadTemplate")
+	//	xc_LoadTemplateFromString = xcDLL.MustFindProc("XC_LoadTemplateFromString")
+	//	xc_TemplateDestroy = xcDLL.MustFindProc("XC_TemplateDestroy")
 	xc_GetDefaultFont = xcDLL.MustFindProc("XC_GetDefaultFont")
 	xc_SetDefaultFont = xcDLL.MustFindProc("XC_SetDefaultFont")
 	xc_InitFont = xcDLL.MustFindProc("XC_InitFont")
@@ -154,13 +154,13 @@ func XC_LoadResourceFromString(pStringXML, pDir string) bool {
 返回:
 	返回模板信息.
 */
-func XC_LoadTemplate(nType XC_OBJECT_TYPE, pFileName string) *template_info_i {
-	ret, _, _ := xc_LoadTemplate.Call(
-		uintptr(nType),
-		StringToUintPtr(pFileName))
+//func XC_LoadTemplate(nType XC_OBJECT_TYPE, pFileName string) *template_info_i {
+//	ret, _, _ := xc_LoadTemplate.Call(
+//		uintptr(nType),
+//		StringToUintPtr(pFileName))
 
-	return (*template_info_i)(unsafe.Pointer(ret))
-}
+//	return (*template_info_i)(unsafe.Pointer(ret))
+//}
 
 /*
 加载模板文件从内存字符串.
@@ -171,13 +171,13 @@ func XC_LoadTemplate(nType XC_OBJECT_TYPE, pFileName string) *template_info_i {
 返回:
 	返回模板信息.
 */
-func XC_LoadTemplateFromString(nType XC_OBJECT_TYPE, pStringXML string) *template_info_i {
-	ret, _, _ := xc_LoadTemplate.Call(
-		uintptr(nType),
-		StringToUintPtr(pStringXML))
+//func XC_LoadTemplateFromString(nType XC_OBJECT_TYPE, pStringXML string) *template_info_i {
+//	ret, _, _ := xc_LoadTemplate.Call(
+//		uintptr(nType),
+//		StringToUintPtr(pStringXML))
 
-	return (*template_info_i)(unsafe.Pointer(ret))
-}
+//	return (*template_info_i)(unsafe.Pointer(ret))
+//}
 
 /*
 项模板信息销毁.
@@ -185,9 +185,9 @@ func XC_LoadTemplateFromString(nType XC_OBJECT_TYPE, pStringXML string) *templat
 参数:
 	pInfo 项模板信息.
 */
-func XC_TemplateDestroy(pInfo *template_info_i) {
-	xc_TemplateDestroy.Call(uintptr(unsafe.Pointer(pInfo)))
-}
+//func XC_TemplateDestroy(pInfo *template_info_i) {
+//	xc_TemplateDestroy.Call(uintptr(unsafe.Pointer(pInfo)))
+//}
 
 /*
 获取默认字体.

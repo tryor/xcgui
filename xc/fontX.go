@@ -14,6 +14,8 @@ var (
 	xFont_EnableAutoDestroy *syscall.Proc
 	xFont_Destroy           *syscall.Proc
 	xFont_GetFont           *syscall.Proc
+
+	xFont_Release *syscall.Proc
 )
 
 func init() {
@@ -25,6 +27,12 @@ func init() {
 	xFont_EnableAutoDestroy = xcDLL.MustFindProc("XFont_EnableAutoDestroy")
 	xFont_Destroy = xcDLL.MustFindProc("XFont_Destroy")
 	xFont_GetFont = xcDLL.MustFindProc("XFont_GetFont")
+
+	xFont_Release = xcDLL.MustFindProc("XFont_Release")
+}
+
+func XFont_Release(hFontX HFONTX) {
+	xFont_Release.Call(uintptr(hFontX))
 }
 
 /*
@@ -54,15 +62,24 @@ func XFont_Create(size int) HFONTX {
 返回:
 	字体句柄.
 */
-func XFont_Create2(pName string, size int, bBold, bItalic, bUnderline, bStrikeOut bool) HFONTX {
+//func XFont_Create2(pName string, size int, bBold, bItalic, bUnderline, bStrikeOut bool) HFONTX {
+//	ret, _, _ := xFont_Create2.Call(
+//		StringToUintPtr(pName),
+//		// uintptr(unsafe.Pointer(pName)),
+//		uintptr(size),
+//		uintptr(BoolToBOOL(bBold)),
+//		uintptr(BoolToBOOL(bItalic)),
+//		uintptr(BoolToBOOL(bUnderline)),
+//		uintptr(BoolToBOOL(bStrikeOut)))
+
+//	return HFONTX(ret)
+//}
+
+func XFont_Create2(pName string, size int, style int) HFONTX {
 	ret, _, _ := xFont_Create2.Call(
 		StringToUintPtr(pName),
-		// uintptr(unsafe.Pointer(pName)),
 		uintptr(size),
-		uintptr(BoolToBOOL(bBold)),
-		uintptr(BoolToBOOL(bItalic)),
-		uintptr(BoolToBOOL(bUnderline)),
-		uintptr(BoolToBOOL(bStrikeOut)))
+		uintptr(style))
 
 	return HFONTX(ret)
 }

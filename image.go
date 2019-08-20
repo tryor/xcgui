@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 import (
-	"github.com/codyguo/xcgui/xc"
+	"github.com/tryor/xcgui/xc"
 )
 
 type Image interface {

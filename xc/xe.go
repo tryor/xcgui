@@ -45,7 +45,8 @@ const (
 	XE_SHOW   37   元素显示隐藏事件.
 	XE_SETFONT   38   元素设置字体事件.
 	XE_KEYDOWN   39   元素按键事件.
-	XE_CHAR   40   通过TranslateMessage函数翻译的字符事件.
+    XE_KEYUP   40
+	XE_CHAR   41   通过TranslateMessage函数翻译的字符事件.
 */
 const (
 	XE_SETFOCUS = 31 + iota
@@ -57,6 +58,7 @@ const (
 	XE_SHOW
 	XE_SETFONT
 	XE_KEYDOWN
+	XE_KEYUP
 	XE_CHAR
 )
 
@@ -99,11 +101,13 @@ const (
 	XE_COMBOBOX_SELECT   71   组合框下拉列表项选择事件.
 	XE_COMBOBOX_POPUP_LIST   72   组合框下拉列表弹出事件.
 	XE_COMBOBOX_EXIT_LIST   73   组合框下拉列表退出事件.
+    XE_COMBOBOX_SELECT_END  74 组合框下拉列表项选择完成事件,编辑框内容已经改变.
 */
 const (
 	XE_COMBOBOX_SELECT = 71 + iota
 	XE_COMBOBOX_POPUP_LIST
 	XE_COMBOBOX_EXIT_LIST
+	XE_COMBOBOX_SELECT_END
 )
 
 /*
@@ -204,4 +208,9 @@ const (
 	XE_DATETIME_CHANGE         = 241
 	XE_DATETIME_POPUP_MONTHCAL = 242
 	XE_DATETIME_EXIT_MONTHCAL  = 243
+)
+
+const (
+	XE_EDIT_CHANGED     = 182
+	XE_EDIT_POS_CHANGED = 183
 )

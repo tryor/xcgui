@@ -39,6 +39,8 @@ var (
 	xBtn_GetBkInfoCount    *syscall.Proc
 	xBtn_ClearBkInfo       *syscall.Proc
 	// xBtn_GetBkInfoManager  *syscall.Proc
+
+	xBtn_SetTypeEx *syscall.Proc
 )
 
 func init() {
@@ -74,6 +76,8 @@ func init() {
 	xBtn_GetBkInfoCount = xcDLL.MustFindProc("XBtn_GetBkInfoCount")
 	xBtn_ClearBkInfo = xcDLL.MustFindProc("XBtn_ClearBkInfo")
 	// xBtn_GetBkInfoManager = xcDLL.MustFindProc("XBtn_GetBkInfoManager")
+
+	xBtn_SetTypeEx = xcDLL.MustFindProc("XBtn_SetTypeEx")
 
 }
 
@@ -155,6 +159,12 @@ func XBtn_SetCheck(hEle HELE, bCheck bool) bool {
 */
 func XBtn_SetStyle(hEle HELE, nStyle Button_style_) {
 	xBtn_SetStyle.Call(
+		uintptr(hEle),
+		uintptr(nStyle))
+}
+
+func XBtn_SetTypeEx(hEle HELE, nStyle Button_type_) {
+	xBtn_SetTypeEx.Call(
 		uintptr(hEle),
 		uintptr(nStyle))
 }
@@ -385,11 +395,19 @@ func XBtn_SetIconSpace(hEle HELE, size int) {
 	pOut 接收文本内容.
 	nOutLen 接收缓冲区长度,字符为单位.
 */
-func XBtn_GetText(hEle HELE, pOut *uint16, nOutLen int) {
+func XBtn_GetText2(hEle HELE, pOut *uint16, nOutLen int) {
 	xBtn_GetText.Call(
 		uintptr(hEle),
 		uintptr(unsafe.Pointer(pOut)),
 		uintptr(nOutLen))
+}
+
+func XBtn_GetText(hEle HELE) (ret string) {
+	r, _, _ := xBtn_GetText.Call(uintptr(hEle))
+	if r != 0 {
+		ret = UINTptrToString(r)
+	}
+	return
 }
 
 /*

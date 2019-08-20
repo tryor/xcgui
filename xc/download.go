@@ -1,18 +1,19 @@
 package xc
 
-import (
-	"bytes"
-	"io"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"os"
-)
+//import (
+//	"bytes"
+//	"io"
+//	"io/ioutil"
+//	"log"
+//	"net/http"
+//	"os"
+//)
 
-import (
-	"github.com/lxn/walk"
-)
+//import (
+//	"github.com/lxn/walk"
+//)
 
+/*
 func downLoadXCGUIDll() {
 	mw, _ := walk.NewMainWindow()
 	ret := walk.MsgBox(mw, "下载提示", "没有找到XCGUI.dll，是否要联网下载？", walk.MsgBoxIconQuestion+walk.MsgBoxOKCancel)
@@ -54,3 +55,4 @@ func downLoadXCGUIDll() {
 
 	mw.Run()
 }
+*/

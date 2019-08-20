@@ -9,13 +9,13 @@ var (
 	xToolBar_InsertEle        *syscall.Proc
 	xToolBar_InsertSeparator  *syscall.Proc
 	xToolBar_EnableButtonMenu *syscall.Proc
-	xToolBar_GetHEle          *syscall.Proc
-	xToolBar_GetButtonLeft    *syscall.Proc
-	xToolBar_GetButtonRight   *syscall.Proc
-	xToolBar_GetButtonMenu    *syscall.Proc
-	xToolBar_SetSpace         *syscall.Proc
-	xToolBar_DeleteEle        *syscall.Proc
-	xToolBar_DeleteAllEle     *syscall.Proc
+	//	xToolBar_GetHEle          *syscall.Proc
+	xToolBar_GetButtonLeft  *syscall.Proc
+	xToolBar_GetButtonRight *syscall.Proc
+	xToolBar_GetButtonMenu  *syscall.Proc
+	xToolBar_SetSpace       *syscall.Proc
+	xToolBar_DeleteEle      *syscall.Proc
+	xToolBar_DeleteAllEle   *syscall.Proc
 )
 
 func init() {
@@ -23,7 +23,7 @@ func init() {
 	xToolBar_InsertEle = xcDLL.MustFindProc("XToolBar_InsertEle")
 	xToolBar_InsertSeparator = xcDLL.MustFindProc("XToolBar_InsertSeparator")
 	xToolBar_EnableButtonMenu = xcDLL.MustFindProc("XToolBar_EnableButtonMenu")
-	xToolBar_GetHEle = xcDLL.MustFindProc("XToolBar_GetHEle")
+	//	xToolBar_GetHEle = xcDLL.MustFindProc("XToolBar_GetHEle")
 	xToolBar_GetButtonLeft = xcDLL.MustFindProc("XToolBar_GetButtonLeft")
 	xToolBar_GetButtonRight = xcDLL.MustFindProc("XToolBar_GetButtonRight")
 	xToolBar_GetButtonMenu = xcDLL.MustFindProc("XToolBar_GetButtonMenu")
@@ -114,13 +114,13 @@ func XToolBar_EnableButtonMenu(hEle HELE, bEnable bool) {
 返回:
 	返回元素句柄.
 */
-func XToolBar_GetHEle(hEle HELE, index int) HELE {
-	ret, _, _ := xToolBar_GetHEle.Call(
-		uintptr(hEle),
-		uintptr(index))
+//func XToolBar_GetHEle(hEle HELE, index int) HELE {
+//	ret, _, _ := xToolBar_GetHEle.Call(
+//		uintptr(hEle),
+//		uintptr(index))
 
-	return HELE(ret)
-}
+//	return HELE(ret)
+//}
 
 /*
 获取左滚动按钮.

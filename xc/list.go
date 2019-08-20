@@ -52,6 +52,14 @@ var (
 	xList_HitTest              *syscall.Proc
 	xList_HitTestOffset        *syscall.Proc
 	xList_RefreshData          *syscall.Proc
+
+	xList_AddColumnText       *syscall.Proc
+	xList_AddItemText         *syscall.Proc
+	xList_SetItemText         *syscall.Proc
+	xList_DeleteItemAll       *syscall.Proc
+	xList_EnableItemBkFullRow *syscall.Proc
+	xList_SetRowSpace         *syscall.Proc
+	xList_DeleteColumnAll_AD  *syscall.Proc
 )
 
 func init() {
@@ -101,6 +109,63 @@ func init() {
 	xList_HitTest = xcDLL.MustFindProc("XList_HitTest")
 	xList_HitTestOffset = xcDLL.MustFindProc("XList_HitTestOffset")
 	xList_RefreshData = xcDLL.MustFindProc("XList_RefreshData")
+
+	xList_AddColumnText = xcDLL.MustFindProc("XList_AddColumnText")
+	xList_AddItemText = xcDLL.MustFindProc("XList_AddItemText")
+	xList_SetItemText = xcDLL.MustFindProc("XList_SetItemText")
+	xList_DeleteItemAll = xcDLL.MustFindProc("XList_DeleteItemAll")
+	xList_EnableItemBkFullRow = xcDLL.MustFindProc("XList_EnableItemBkFullRow")
+	xList_SetRowSpace = xcDLL.MustFindProc("XList_SetRowSpace")
+	xList_DeleteColumnAll_AD = xcDLL.MustFindProc("XList_DeleteColumnAll_AD")
+
+}
+
+func XList_SetRowSpace(hEle HELE, w int) {
+	xList_SetRowSpace.Call(
+		uintptr(hEle),
+		uintptr(w))
+}
+
+func XList_EnableItemBkFullRow(hEle HELE, bEnable bool) {
+	xList_EnableItemBkFullRow.Call(
+		uintptr(hEle),
+		uintptr(BoolToBOOL(bEnable)))
+}
+
+func XList_DeleteItemAll(hEle HELE) {
+	xList_SetItemText.Call(uintptr(hEle))
+}
+
+func XList_DeleteColumnAll_AD(hEle HELE) {
+	xList_DeleteColumnAll_AD.Call(uintptr(hEle))
+}
+
+//HELE hEle, int iItem, int iColumn, const wchar_t *pText
+func XList_SetItemText(hEle HELE, iItem, iColumn int, text string) int {
+	ret, _, _ := xList_SetItemText.Call(
+		uintptr(hEle),
+		uintptr(iItem),
+		uintptr(iColumn),
+		StringToUintPtr(text))
+
+	return int(ret)
+}
+
+func XList_AddItemText(hEle HELE, text string) int {
+	ret, _, _ := xList_AddItemText.Call(
+		uintptr(hEle),
+		StringToUintPtr(text))
+
+	return int(ret)
+}
+
+func XList_AddColumnText(hEle HELE, w int, text string) int {
+	ret, _, _ := xList_AddColumnText.Call(
+		uintptr(hEle),
+		uintptr(w),
+		StringToUintPtr(text))
+
+	return int(ret)
 }
 
 /*
@@ -529,8 +594,8 @@ pStringXML 字符串指针.*uint16
 func XList_SetItemTemplateXMLFromString(hEle HELE, pStringXML string) bool {
 	ret, _, _ := xList_SetItemTemplateXMLFromString.Call(
 		uintptr(hEle),
-		StringToUintPtr(pStringXML))
-	// uintptr(unsafe.Pointer(pStringXML)))
+		//StringToUintPtr(pStringXML))
+		uintptr(unsafe.Pointer(&[]byte(pStringXML)[0])))
 
 	return ret == TRUE
 }

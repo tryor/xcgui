@@ -25,18 +25,18 @@ var (
 
 var (
 	// Functions
-	xC_UnicodeToAnsi         *syscall.Proc
-	xC_AnsiToUnicode         *syscall.Proc
-	xC_DebugToFileInfo       *syscall.Proc
-	xC_IsHELE                *syscall.Proc
-	xC_IsHWINDOW             *syscall.Proc
-	xC_IsShape               *syscall.Proc
-	xC_IsHXCGUI              *syscall.Proc
-	xC_hWindowFromHWnd       *syscall.Proc
-	xC_IsSViewExtend         *syscall.Proc
-	xC_GetObjectType         *syscall.Proc
-	xC_GetObjectByID         *syscall.Proc
-	xC_GetResIDValue         *syscall.Proc
+	xC_UnicodeToAnsi   *syscall.Proc
+	xC_AnsiToUnicode   *syscall.Proc
+	xC_DebugToFileInfo *syscall.Proc
+	xC_IsHELE          *syscall.Proc
+	xC_IsHWINDOW       *syscall.Proc
+	xC_IsShape         *syscall.Proc
+	xC_IsHXCGUI        *syscall.Proc
+	xC_hWindowFromHWnd *syscall.Proc
+	xC_IsSViewExtend   *syscall.Proc
+	xC_GetObjectType   *syscall.Proc
+	xC_GetObjectByID   *syscall.Proc
+	//	xC_GetResIDValue         *syscall.Proc
 	xC_SetPaintFrequency     *syscall.Proc
 	xC_RectInRect            *syscall.Proc
 	xC_CombineRect           *syscall.Proc
@@ -47,6 +47,9 @@ var (
 	xInitXCGUI               *syscall.Proc
 	xRunXCGUI                *syscall.Proc
 	xExitXCGUI               *syscall.Proc
+
+	xC_SetTextRenderingHint   *syscall.Proc
+	xDraw_EnableSmoothingMode *syscall.Proc
 )
 
 type POINT struct {
@@ -85,7 +88,7 @@ func init() {
 		xcDLL = syscall.MustLoadDLL("../../lib/" + xcDll)
 	} else {
 		// 下载XCGUI.dll
-		downLoadXCGUIDll()
+		//downLoadXCGUIDll()
 
 		if FileExist(xcDll) {
 			xcDLL = syscall.MustLoadDLL(xcDll)
@@ -107,7 +110,7 @@ func init() {
 	xC_IsSViewExtend = xcDLL.MustFindProc("XC_IsSViewExtend")
 	xC_GetObjectType = xcDLL.MustFindProc("XC_GetObjectType")
 	xC_GetObjectByID = xcDLL.MustFindProc("XC_GetObjectByID")
-	xC_GetResIDValue = xcDLL.MustFindProc("XC_GetResIDValue")
+	//xC_GetResIDValue = xcDLL.MustFindProc("XC_GetResIDValue")
 	xC_SetPaintFrequency = xcDLL.MustFindProc("XC_SetPaintFrequency")
 	xC_RectInRect = xcDLL.MustFindProc("XC_RectInRect")
 	xC_CombineRect = xcDLL.MustFindProc("XC_CombineRect")
@@ -118,6 +121,9 @@ func init() {
 	xInitXCGUI = xcDLL.MustFindProc("XInitXCGUI")
 	xRunXCGUI = xcDLL.MustFindProc("XRunXCGUI")
 	xExitXCGUI = xcDLL.MustFindProc("XExitXCGUI")
+
+	xC_SetTextRenderingHint = xcDLL.MustFindProc("XC_SetTextRenderingHint")
+	xDraw_EnableSmoothingMode = xcDLL.MustFindProc("XDraw_EnableSmoothingMode")
 
 	ret, _, _ := xInitXCGUI.Call(StringToUintPtr("XCGUI Library For Go"))
 	// XCGUI的返回值: true 为 1 ，false 为 0
@@ -338,11 +344,11 @@ func XC_GetObjectByID(hWindow HWINDOW, nID int) HXCGUI {
 返回:
 	返回整型值. 注解:int nID=XC_GetResIDValue(L"ID_BUTTON_1");
 */
-func XC_GetResIDValue(pName *uint16) int {
-	ret, _, _ := xC_GetResIDValue.Call(uintptr(unsafe.Pointer(pName)))
+//func XC_GetResIDValue(pName *uint16) int {
+//	ret, _, _ := xC_GetResIDValue.Call(uintptr(unsafe.Pointer(pName)))
 
-	return int(ret)
-}
+//	return int(ret)
+//}
 
 /*
 设置UI的最小重绘频率.
@@ -435,6 +441,15 @@ func XRunXCGUI() {
 func XExitXCGUI() {
 	xExitXCGUI.Call()
 	xcDLL.Release()
+}
+
+//设置文本渲染质量.
+func XC_SetTextRenderingHint(nType int) {
+	xC_SetTextRenderingHint.Call(uintptr(nType))
+}
+
+func XDraw_EnableSmoothingMode(hDraw HDRAW, bEnable bool) {
+	xDraw_EnableSmoothingMode.Call(uintptr(hDraw), uintptr(BoolToBOOL(bEnable)))
 }
 
 func FullPath(path string) (p string) {

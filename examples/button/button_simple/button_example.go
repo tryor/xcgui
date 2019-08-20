@@ -4,7 +4,7 @@ import (
 	"log"
 )
 import (
-	"github.com/codyguo/xcgui"
+	"github.com/tryor/xcgui"
 	// "github.com/codyguo/xcgui/xc"
 )
 

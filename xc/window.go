@@ -8,70 +8,76 @@ import (
 
 var (
 	// Functions
-	xWnd_Create               *syscall.Proc
-	xWnd_CreateEx             *syscall.Proc
-	xWnd_RegEventC            *syscall.Proc
-	xWnd_RegEventC1           *syscall.Proc
-	xWnd_AddEle               *syscall.Proc
-	xWnd_InsertEle            *syscall.Proc
-	xWnd_AddShape             *syscall.Proc
-	xWnd_RedrawWnd            *syscall.Proc
-	xWnd_RedrawWndRect        *syscall.Proc
-	xWnd_SetFocusEle          *syscall.Proc
-	xWnd_GetFocusEle          *syscall.Proc
-	xWnd_GetStayHELE          *syscall.Proc
-	xWnd_SetCursor            *syscall.Proc
-	xWnd_GetCursor            *syscall.Proc
-	xWnd_GetHWND              *syscall.Proc
-	xWnd_EnableDragBorder     *syscall.Proc
-	xWnd_EnableDragWindow     *syscall.Proc
-	xWnd_EnableDragCaption    *syscall.Proc
-	xWnd_EnableDrawBk         *syscall.Proc
-	xWnd_EnableAutoFocus      *syscall.Proc
-	xWnd_EnableMaxWindow      *syscall.Proc
-	xWnd_SetCaptureEle        *syscall.Proc
-	xWnd_GetCaptureEle        *syscall.Proc
-	xWnd_GetDrawRect          *syscall.Proc
-	xWnd_ShowWindow           *syscall.Proc
-	xWnd_BindLayoutEle        *syscall.Proc
-	xWnd_GetLayoutEle         *syscall.Proc
-	xWnd_SetCursorSys         *syscall.Proc
-	xWnd_SetFont              *syscall.Proc
-	xWnd_SetID                *syscall.Proc
-	xWnd_GetID                *syscall.Proc
-	xWnd_SetLayoutSize        *syscall.Proc
-	xWnd_GetLayoutSize        *syscall.Proc
-	xWnd_SetDragBorderSize    *syscall.Proc
-	xWnd_GetDragBorderSize    *syscall.Proc
-	xWnd_SetMinimumSize       *syscall.Proc
-	xWnd_HitChildEle          *syscall.Proc
-	xWnd_GetChildCount        *syscall.Proc
-	xWnd_GetChildByIndex      *syscall.Proc
-	xWnd_GetChildByID         *syscall.Proc
-	xWnd_GetEle               *syscall.Proc
-	xWnd_GetChildShapeCount   *syscall.Proc
-	xWnd_GetChildShapeByIndex *syscall.Proc
-	xWnd_CloseWindow          *syscall.Proc
-	xWnd_BindLayoutObject     *syscall.Proc
-	xWnd_GetLayoutObject      *syscall.Proc
-	xWnd_AdjustLayout         *syscall.Proc
-	xWnd_AdjustLayoutObject   *syscall.Proc
-	xWnd_CreateCaret          *syscall.Proc
-	xWnd_SetCaretSize         *syscall.Proc
-	xWnd_SetCaretPos          *syscall.Proc
-	xWnd_SetCaretPosEx        *syscall.Proc
-	xWnd_SetCaretColor        *syscall.Proc
-	xWnd_ShowCaret            *syscall.Proc
-	xWnd_DestroyCaret         *syscall.Proc
-	xWnd_GetCaretHELE         *syscall.Proc
-	xWnd_GetClientRect        *syscall.Proc
-	xWnd_GetBodyRect          *syscall.Proc
-	xWnd_SetTimer             *syscall.Proc
-	xWnd_KillTimer            *syscall.Proc
-	xWnd_GetBkInfoManager     *syscall.Proc
-	xWnd_SetTransparentType   *syscall.Proc
-	xWnd_SetTransparentAlpha  *syscall.Proc
-	xWnd_SetTransparentColor  *syscall.Proc
+	xWnd_Create     *syscall.Proc
+	xWnd_CreateEx   *syscall.Proc
+	xWnd_RegEventC  *syscall.Proc
+	xWnd_RegEventC1 *syscall.Proc
+	//	xWnd_AddEle               *syscall.Proc
+	//	xWnd_InsertEle            *syscall.Proc
+	//	xWnd_AddShape             *syscall.Proc
+	xWnd_RedrawWnd         *syscall.Proc
+	xWnd_RedrawWndRect     *syscall.Proc
+	xWnd_SetFocusEle       *syscall.Proc
+	xWnd_GetFocusEle       *syscall.Proc
+	xWnd_GetStayHELE       *syscall.Proc
+	xWnd_SetCursor         *syscall.Proc
+	xWnd_GetCursor         *syscall.Proc
+	xWnd_GetHWND           *syscall.Proc
+	xWnd_EnableDragBorder  *syscall.Proc
+	xWnd_EnableDragWindow  *syscall.Proc
+	xWnd_EnableDragCaption *syscall.Proc
+	xWnd_EnableDrawBk      *syscall.Proc
+	xWnd_EnableAutoFocus   *syscall.Proc
+	xWnd_EnableMaxWindow   *syscall.Proc
+	xWnd_SetCaptureEle     *syscall.Proc
+	xWnd_GetCaptureEle     *syscall.Proc
+	xWnd_GetDrawRect       *syscall.Proc
+	xWnd_ShowWindow        *syscall.Proc
+	xWnd_BindLayoutEle     *syscall.Proc
+	xWnd_GetLayoutEle      *syscall.Proc
+	xWnd_SetCursorSys      *syscall.Proc
+	xWnd_SetFont           *syscall.Proc
+	xWnd_SetID             *syscall.Proc
+	xWnd_GetID             *syscall.Proc
+	xWnd_SetLayoutSize     *syscall.Proc
+	xWnd_GetLayoutSize     *syscall.Proc
+	xWnd_SetDragBorderSize *syscall.Proc
+	xWnd_GetDragBorderSize *syscall.Proc
+	xWnd_SetMinimumSize    *syscall.Proc
+	xWnd_HitChildEle       *syscall.Proc
+	xWnd_GetChildCount     *syscall.Proc
+	xWnd_GetChildByIndex   *syscall.Proc
+	xWnd_GetChildByID      *syscall.Proc
+	//	xWnd_GetEle               *syscall.Proc
+	//	xWnd_GetChildShapeCount   *syscall.Proc
+	//	xWnd_GetChildShapeByIndex *syscall.Proc
+	xWnd_CloseWindow *syscall.Proc
+	//	xWnd_BindLayoutObject    *syscall.Proc
+	//	xWnd_GetLayoutObject     *syscall.Proc
+	xWnd_AdjustLayout *syscall.Proc
+	//	xWnd_AdjustLayoutObject  *syscall.Proc
+	xWnd_CreateCaret   *syscall.Proc
+	xWnd_SetCaretSize  *syscall.Proc
+	xWnd_SetCaretPos   *syscall.Proc
+	xWnd_SetCaretPosEx *syscall.Proc
+	xWnd_SetCaretColor *syscall.Proc
+	xWnd_ShowCaret     *syscall.Proc
+	xWnd_DestroyCaret  *syscall.Proc
+	xWnd_GetCaretHELE  *syscall.Proc
+	xWnd_GetClientRect *syscall.Proc
+	xWnd_GetBodyRect   *syscall.Proc
+	xWnd_SetTimer      *syscall.Proc
+	xWnd_KillTimer     *syscall.Proc
+	//	xWnd_GetBkInfoManager    *syscall.Proc
+	xWnd_SetTransparentType  *syscall.Proc
+	xWnd_SetTransparentAlpha *syscall.Proc
+	xWnd_SetTransparentColor *syscall.Proc
+
+	xWnd_SetTextColor *syscall.Proc
+
+	xWnd_SetShadowInfo *syscall.Proc
+	xWnd_Move          *syscall.Proc
+	//xWnd_SetWindowRect *syscall.Proc
 )
 
 func init() {
@@ -80,9 +86,9 @@ func init() {
 	xWnd_CreateEx = xcDLL.MustFindProc("XWnd_CreateEx")
 	xWnd_RegEventC = xcDLL.MustFindProc("XWnd_RegEventC")
 	xWnd_RegEventC1 = xcDLL.MustFindProc("XWnd_RegEventC1")
-	xWnd_AddEle = xcDLL.MustFindProc("XWnd_AddEle")
-	xWnd_InsertEle = xcDLL.MustFindProc("XWnd_InsertEle")
-	xWnd_AddShape = xcDLL.MustFindProc("XWnd_AddShape")
+	//	xWnd_AddEle = xcDLL.MustFindProc("XWnd_AddEle")
+	//	xWnd_InsertEle = xcDLL.MustFindProc("XWnd_InsertEle")
+	//	xWnd_AddShape = xcDLL.MustFindProc("XWnd_AddShape")
 	xWnd_RedrawWnd = xcDLL.MustFindProc("XWnd_RedrawWnd")
 	xWnd_RedrawWndRect = xcDLL.MustFindProc("XWnd_RedrawWndRect")
 	xWnd_SetFocusEle = xcDLL.MustFindProc("XWnd_SetFocusEle")
@@ -116,14 +122,14 @@ func init() {
 	xWnd_GetChildCount = xcDLL.MustFindProc("XWnd_GetChildCount")
 	xWnd_GetChildByIndex = xcDLL.MustFindProc("XWnd_GetChildByIndex")
 	xWnd_GetChildByID = xcDLL.MustFindProc("XWnd_GetChildByID")
-	xWnd_GetEle = xcDLL.MustFindProc("XWnd_GetEle")
-	xWnd_GetChildShapeCount = xcDLL.MustFindProc("XWnd_GetChildShapeCount")
-	xWnd_GetChildShapeByIndex = xcDLL.MustFindProc("XWnd_GetChildShapeByIndex")
+	//	xWnd_GetEle = xcDLL.MustFindProc("XWnd_GetEle")
+	//	xWnd_GetChildShapeCount = xcDLL.MustFindProc("XWnd_GetChildShapeCount")
+	//	xWnd_GetChildShapeByIndex = xcDLL.MustFindProc("XWnd_GetChildShapeByIndex")
 	xWnd_CloseWindow = xcDLL.MustFindProc("XWnd_CloseWindow")
-	xWnd_BindLayoutObject = xcDLL.MustFindProc("XWnd_BindLayoutObject")
-	xWnd_GetLayoutObject = xcDLL.MustFindProc("XWnd_GetLayoutObject")
+	//	xWnd_BindLayoutObject = xcDLL.MustFindProc("XWnd_BindLayoutObject")
+	//	xWnd_GetLayoutObject = xcDLL.MustFindProc("XWnd_GetLayoutObject")
 	xWnd_AdjustLayout = xcDLL.MustFindProc("XWnd_AdjustLayout")
-	xWnd_AdjustLayoutObject = xcDLL.MustFindProc("XWnd_AdjustLayoutObject")
+	//	xWnd_AdjustLayoutObject = xcDLL.MustFindProc("XWnd_AdjustLayoutObject")
 	xWnd_CreateCaret = xcDLL.MustFindProc("XWnd_CreateCaret")
 	xWnd_SetCaretSize = xcDLL.MustFindProc("XWnd_SetCaretSize")
 	xWnd_SetCaretPos = xcDLL.MustFindProc("XWnd_SetCaretPos")
@@ -136,10 +142,29 @@ func init() {
 	xWnd_GetBodyRect = xcDLL.MustFindProc("XWnd_GetBodyRect")
 	xWnd_SetTimer = xcDLL.MustFindProc("XWnd_SetTimer")
 	xWnd_KillTimer = xcDLL.MustFindProc("XWnd_KillTimer")
-	xWnd_GetBkInfoManager = xcDLL.MustFindProc("XWnd_GetBkInfoManager")
+	//	xWnd_GetBkInfoManager = xcDLL.MustFindProc("XWnd_GetBkInfoManager")
 	xWnd_SetTransparentType = xcDLL.MustFindProc("XWnd_SetTransparentType")
 	xWnd_SetTransparentAlpha = xcDLL.MustFindProc("XWnd_SetTransparentAlpha")
 	xWnd_SetTransparentColor = xcDLL.MustFindProc("XWnd_SetTransparentColor")
+
+	xWnd_SetTextColor = xcDLL.MustFindProc("XWnd_SetTextColor")
+
+	xWnd_SetShadowInfo = xcDLL.MustFindProc("XWnd_SetShadowInfo")
+	xWnd_Move = xcDLL.MustFindProc("XWnd_Move")
+
+	//xWnd_SetWindowRect = xcDLL.MustFindProc("XWnd_SetWindowRect")
+}
+
+// HWINDOW  hWindow,
+//  int  nSize,
+//  int  nDepth,
+//  int  nAngeleSize,
+//  BOOL  bRightAngle,
+//  COLORREF  color
+
+func XWnd_SetShadowInfo(hWindow HWINDOW, nSize, nDepth, nAngeleSize int, bRightAngle bool, color COLORREF) {
+	xWnd_SetShadowInfo.Call(uintptr(hWindow), uintptr(nSize),
+		uintptr(nDepth), uintptr(nAngeleSize), uintptr(BoolToBOOL(bRightAngle)), uintptr(color))
 }
 
 /*
@@ -244,13 +269,13 @@ func XWnd_RegEventC1(hWindow HWINDOW, nEvent int, pFun uintptr) {
 返回:
 	成功返回TRUE否则返回FALSE.
 */
-func XWnd_AddEle(hWindow HWINDOW, hEle HELE) bool {
-	ret, _, _ := xWnd_AddEle.Call(
-		uintptr(hWindow),
-		uintptr(hEle))
+//func XWnd_AddEle(hWindow HWINDOW, hEle HELE) bool {
+//	ret, _, _ := xWnd_AddEle.Call(
+//		uintptr(hWindow),
+//		uintptr(hEle))
 
-	return ret == TRUE
-}
+//	return ret == TRUE
+//}
 
 /*
 插入元素到目标元素前面.
@@ -262,14 +287,14 @@ func XWnd_AddEle(hWindow HWINDOW, hEle HELE) bool {
 返回:
 	成功返回TRUE否则返回FALSE.
 */
-func XWnd_InsertEle(hWindow HWINDOW, hChildEle, hDestEle HELE) bool {
-	ret, _, _ := xWnd_InsertEle.Call(
-		uintptr(hWindow),
-		uintptr(hChildEle),
-		uintptr(hDestEle))
+//func XWnd_InsertEle(hWindow HWINDOW, hChildEle, hDestEle HELE) bool {
+//	ret, _, _ := xWnd_InsertEle.Call(
+//		uintptr(hWindow),
+//		uintptr(hChildEle),
+//		uintptr(hDestEle))
 
-	return ret == TRUE
-}
+//	return ret == TRUE
+//}
 
 /*
 添加形状对象到窗口.
@@ -280,13 +305,13 @@ func XWnd_InsertEle(hWindow HWINDOW, hChildEle, hDestEle HELE) bool {
 返回:
 	成功返回TRUE否则返回FALSE.
 */
-func XWnd_AddShape(hWindow HWINDOW, hShape HXCGUI) bool {
-	ret, _, _ := xWnd_AddShape.Call(
-		uintptr(hWindow),
-		uintptr(hShape))
+//func XWnd_AddShape(hWindow HWINDOW, hShape HXCGUI) bool {
+//	ret, _, _ := xWnd_AddShape.Call(
+//		uintptr(hWindow),
+//		uintptr(hShape))
 
-	return ret == TRUE
-}
+//	return ret == TRUE
+//}
 
 /*
 重绘窗口.
@@ -294,8 +319,12 @@ func XWnd_AddShape(hWindow HWINDOW, hShape HXCGUI) bool {
 参数:
 	hWindow 窗口资源句柄.
 */
-func XWnd_RedrawWnd(hWindow HWINDOW) {
-	xWnd_RedrawWnd.Call(uintptr(hWindow))
+func XWnd_RedrawWnd(hWindow HWINDOW, b bool) {
+	var bImmediate = uintptr(FALSE)
+	if b {
+		bImmediate = uintptr(TRUE)
+	}
+	xWnd_RedrawWnd.Call(uintptr(hWindow), bImmediate)
 }
 
 /*
@@ -596,6 +625,12 @@ func XWnd_SetFont(hWindow HWINDOW, hFontx HFONTX) {
 		uintptr(hFontx))
 }
 
+func XWnd_SetTextColor(hWindow HWINDOW, color COLORREF, alpha byte) {
+	xWnd_SetTextColor.Call(
+		uintptr(hWindow),
+		uintptr(color), uintptr(alpha))
+}
+
 /*
 设置窗口ID.
 
@@ -702,6 +737,13 @@ func XWnd_SetMinimumSize(hWindow HWINDOW, width, height int) {
 		uintptr(height))
 }
 
+func XWnd_Move(hWindow HWINDOW, x, y int) {
+	xWnd_Move.Call(
+		uintptr(hWindow),
+		uintptr(x),
+		uintptr(y))
+}
+
 /*
 检测所在元素.
 
@@ -776,13 +818,13 @@ func XWnd_GetChildByID(hWindow HWINDOW, nID int) HELE {
 返回:
 	元素句柄.
 */
-func XWnd_GetEle(hWindow HWINDOW, nID int) HELE {
-	ret, _, _ := xWnd_GetEle.Call(
-		uintptr(hWindow),
-		uintptr(nID))
+//func XWnd_GetEle(hWindow HWINDOW, nID int) HELE {
+//	ret, _, _ := xWnd_GetEle.Call(
+//		uintptr(hWindow),
+//		uintptr(nID))
 
-	return HELE(ret)
-}
+//	return HELE(ret)
+//}
 
 /*
 获取子对象(形状对象)数量,只检查当前层.
@@ -791,11 +833,11 @@ func XWnd_GetEle(hWindow HWINDOW, nID int) HELE {
 	hWindow 窗口句柄.
 	返回:返回形状对象数量.
 */
-func XWnd_GetChildShapeCount(hWindow HWINDOW) int {
-	ret, _, _ := xWnd_GetChildShapeCount.Call(uintptr(hWindow))
+//func XWnd_GetChildShapeCount(hWindow HWINDOW) int {
+//	ret, _, _ := xWnd_GetChildShapeCount.Call(uintptr(hWindow))
 
-	return int(ret)
-}
+//	return int(ret)
+//}
 
 /*
 获取子对象(形状对象)通过索引.
@@ -806,13 +848,13 @@ func XWnd_GetChildShapeCount(hWindow HWINDOW) int {
 返回:
 	返回形状对象句柄.
 */
-func XWnd_GetChildShapeByIndex(hWindow HWINDOW, index int) HXCGUI {
-	ret, _, _ := xWnd_GetChildShapeByIndex.Call(
-		uintptr(hWindow),
-		uintptr(index))
+//func XWnd_GetChildShapeByIndex(hWindow HWINDOW, index int) HXCGUI {
+//	ret, _, _ := xWnd_GetChildShapeByIndex.Call(
+//		uintptr(hWindow),
+//		uintptr(index))
 
-	return HXCGUI(ret)
-}
+//	return HXCGUI(ret)
+//}
 
 /*
 关闭窗口.
@@ -832,12 +874,12 @@ func XWnd_CloseWindow(hWindow HWINDOW) {
 	nPosition 参见宏定义.
 	hLayout 布局对象.
 */
-func XWnd_BindLayoutObject(hWindow HWINDOW, nPosition Window_position_, hLayout HXCGUI) {
-	xWnd_BindLayoutObject.Call(
-		uintptr(hWindow),
-		uintptr(nPosition),
-		uintptr(hLayout))
-}
+//func XWnd_BindLayoutObject(hWindow HWINDOW, nPosition Window_position_, hLayout HXCGUI) {
+//	xWnd_BindLayoutObject.Call(
+//		uintptr(hWindow),
+//		uintptr(nPosition),
+//		uintptr(hLayout))
+//}
 
 /*
 获取布局对象.
@@ -848,13 +890,13 @@ func XWnd_BindLayoutObject(hWindow HWINDOW, nPosition Window_position_, hLayout 
 返回:
 	布局对象句柄.
 */
-func XWnd_GetLayoutObject(hWindow HWINDOW, nPosition Window_position_) HXCGUI {
-	ret, _, _ := xWnd_GetLayoutObject.Call(
-		uintptr(hWindow),
-		uintptr(nPosition))
+//func XWnd_GetLayoutObject(hWindow HWINDOW, nPosition Window_position_) HXCGUI {
+//	ret, _, _ := xWnd_GetLayoutObject.Call(
+//		uintptr(hWindow),
+//		uintptr(nPosition))
 
-	return HXCGUI(ret)
-}
+//	return HXCGUI(ret)
+//}
 
 /*
 调整窗口布局,该函数只能调整受窗口布局管理的对象,不受窗口布局管理的[布局对象]请使用函数 XWnd_AdjustLayoutObject().
@@ -873,9 +915,9 @@ func XWnd_AdjustLayout(hWindow HWINDOW) {
 	hWindow 窗口句柄.
 	注解:XWndAdjustLayoutObject() 与 XWnd_AdjustLayout() 不分先后顺序 .
 */
-func XWnd_AdjustLayoutObject(hWindow HWINDOW) {
-	xWnd_AdjustLayoutObject.Call(uintptr(hWindow))
-}
+//func XWnd_AdjustLayoutObject(hWindow HWINDOW) {
+//	xWnd_AdjustLayoutObject.Call(uintptr(hWindow))
+//}
 
 /*
 创建插入符.
@@ -1068,13 +1110,13 @@ func XWnd_KillTimer(hWindow HWINDOW, nIDEvent uint32) bool {
 返回:
 	背景内容管理器.
 */
-func XWnd_GetBkInfoManager(hWindow HWINDOW, nPosition Window_position_) HBKINFOM {
-	ret, _, _ := xWnd_GetBkInfoManager.Call(
-		uintptr(hWindow),
-		uintptr(nPosition))
+//func XWnd_GetBkInfoManager(hWindow HWINDOW, nPosition Window_position_) HBKINFOM {
+//	ret, _, _ := xWnd_GetBkInfoManager.Call(
+//		uintptr(hWindow),
+//		uintptr(nPosition))
 
-	return HBKINFOM(ret)
-}
+//	return HBKINFOM(ret)
+//}
 
 /*
 设置透明窗口,同时可以通过该函数关闭透明窗口.

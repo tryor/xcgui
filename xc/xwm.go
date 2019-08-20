@@ -423,14 +423,23 @@ const (
 	XWM_MENU_EXIT   0x7000+8   菜单退出
 	XWM_MENU_DRAW_BACKGROUND   0x7000+9   绘制菜单背景, 启用该功能需要调用XMenu_EnableDrawBackground().
 	XWM_MENU_DRAWITEM   0x7000+10   绘制菜单项事件, 启用该功能需要调用XMenu_EnableDrawItem().
+
+
+#define  XWM_MENU_POPUP   0x7000+11   菜单弹出
+#define  XWM_MENU_POPUP_WND   0x7000+12   菜单弹出窗口
+#define  XWM_MENU_SELECT   0x7000+13   菜单选择
+#define  XWM_MENU_EXIT   0x7000+14   菜单退出
+#define  XWM_MENU_DRAW_BACKGROUND   0x7000+15   绘制菜单背景, 启用该功能需要调用XMenu_EnableDrawBackground().
+#define  XWM_MENU_DRAWITEM   0x7000+16   绘制菜单项事件, 启用该功能需要调用XMenu_EnableDrawItem().
+
 */
 const (
-	XWM_MENU_POPUP           = 0x7000 + 5
-	XWM_MENU_POPUP_WND       = 0x7000 + 6
-	XWM_MENU_SELECT          = 0x7000 + 7
-	XWM_MENU_EXIT            = 0x7000 + 8
-	XWM_MENU_DRAW_BACKGROUND = 0x7000 + 9
-	XWM_MENU_DRAWITEM        = 0x7000 + 10
+	XWM_MENU_POPUP           = 0x7000 + 11
+	XWM_MENU_POPUP_WND       = 0x7000 + 12
+	XWM_MENU_SELECT          = 0x7000 + 13
+	XWM_MENU_EXIT            = 0x7000 + 14
+	XWM_MENU_DRAW_BACKGROUND = 0x7000 + 15
+	XWM_MENU_DRAWITEM        = 0x7000 + 16
 )
 
 /*
@@ -448,9 +457,33 @@ const (
 	XWM_EVENT_ALL 事件投递 -------不公开-------不需要注册
 	XWM_WINDPROC 注册窗口处理过程
 	XWM_DRAW_T 窗口绘制,内部使用, wParam:0, lParam:0
+
+
 */
 const (
 	XWM_EVENT_ALL = WM_APP + 1000
-	XWM_WINDPROC  = 0x7000
+	XWM_WINDPROC  = 0x7000 + 2
 	XWM_DRAW_T    = 0x7000 + 1
+)
+
+/*
+#define  XWM_XC_TIMER   0x7000+5
+  炫彩定时器,非系统定时器,注册消息XWM_TIMER接收
+
+#define  XWM_FLOAT_PANE   0x7000+18
+  浮动窗格
+
+#define  XWM_PAINT_END   0x7000+19
+  窗口绘制完成消息
+
+#define  XWM_PAINT_DISPLAY   0x7000+20
+  窗口绘制完成并且已经显示到屏幕
+
+
+*/
+const (
+	XWM_XC_TIMER      = 0x7000 + 5
+	XWM_FLOAT_PANE    = 0x7000 + 18
+	XWM_PAINT_END     = 0x7000 + 19
+	XWM_PAINT_DISPLAY = 0x7000 + 20
 )

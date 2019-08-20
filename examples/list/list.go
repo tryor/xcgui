@@ -13,10 +13,10 @@ func main() {
 	xcgui.CloseBtn(hWindow)
 
 	hList := xcgui.XList_Create(20, 40, 500, 300, xcgui.HXCGUI(hWindow))
-	xcgui.XList_SetItemTemplateXML(hList, "../xml-template/List_Item.xml")
-	xcgui.XSView_SetLineSize(hList, 20, 20)
+	//xcgui.XList_SetItemTemplateXML(hList, "../xml-template/List_Item.xml")
+	//	xcgui.XSView_SetLineSize(hList, 20, 20)
 
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 4; i++ {
 		xcgui.XList_AddColumn(hList, 100)
 	}
 

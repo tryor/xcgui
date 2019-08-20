@@ -1,7 +1,7 @@
 package main
 
 import (
-	xcgui "github.com/codyguo/xcgui/xc"
+	xcgui "github.com/tryor/xcgui/xc"
 )
 
 func main() {
