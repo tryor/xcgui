@@ -50,6 +50,8 @@ var (
 
 	xC_SetTextRenderingHint   *syscall.Proc
 	xDraw_EnableSmoothingMode *syscall.Proc
+
+	xC_CallUiThread *syscall.Proc
 )
 
 type POINT struct {
@@ -125,6 +127,8 @@ func init() {
 	xC_SetTextRenderingHint = xcDLL.MustFindProc("XC_SetTextRenderingHint")
 	xDraw_EnableSmoothingMode = xcDLL.MustFindProc("XDraw_EnableSmoothingMode")
 
+	xC_CallUiThread = xcDLL.MustFindProc("XC_CallUiThread")
+
 	ret, _, _ := xInitXCGUI.Call(StringToUintPtr("XCGUI Library For Go"))
 	// XCGUI的返回值: true 为 1 ，false 为 0
 	if ret != TRUE {
@@ -133,6 +137,12 @@ func init() {
 
 	// 默认不生成xcgui_debug.txt
 	XC_EnableDebugFile(false)
+}
+
+//int CALLBACK CallUiThread(int data)
+func XC_CallUiThread(f func(data int) int, lpParam int) int {
+	r, _, _ := xC_CallUiThread.Call(syscall.NewCallback(f), uintptr(lpParam))
+	return int(r)
 }
 
 /* 由于在init已经调用过了，这里只留个函数名字
