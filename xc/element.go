@@ -113,7 +113,9 @@ var (
 	xEle_SetPadding *syscall.Proc
 	xEle_GetPadding *syscall.Proc
 
-//	xEle_SetLayoutWidth *syscall.Proc
+	//	xEle_SetLayoutWidth *syscall.Proc
+
+	xEle_SetTopmost *syscall.Proc
 )
 
 func init() {
@@ -224,6 +226,12 @@ func init() {
 	//	xEle_SetLayoutWidth = xcDLL.MustFindProc("XEle_SetLayoutWidth")
 
 	xEle_GetPadding = xcDLL.MustFindProc("XEle_GetPadding")
+
+	xEle_SetTopmost = xcDLL.MustFindProc("XEle_SetTopmost")
+}
+
+func XEle_SetTopmost(hEle HELE, b bool) {
+	xEle_SetTopmost.Call(uintptr(hEle), uintptr(BoolToBOOL(b)))
 }
 
 //XEle_SetLayoutWidth (HELE hEle, layout_size_type_ nType, int nWidth)
