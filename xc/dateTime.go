@@ -7,16 +7,17 @@ import (
 
 var (
 	// Functions
-	xDateTime_Create        *syscall.Proc
-	xDateTime_SetStyle      *syscall.Proc
-	xDateTime_GetStyle      *syscall.Proc
-	xDateTime_GetButton     *syscall.Proc
-	xDateTime_GetSelBkColor *syscall.Proc
-	xDateTime_SetSelBkColor *syscall.Proc
-	xDateTime_GetDate       *syscall.Proc
-	xDateTime_SetDate       *syscall.Proc
-	xDateTime_GetTime       *syscall.Proc
-	xDateTime_SetTime       *syscall.Proc
+	xDateTime_Create           *syscall.Proc
+	xDateTime_SetStyle         *syscall.Proc
+	xDateTime_GetStyle         *syscall.Proc
+	xDateTime_GetButton        *syscall.Proc
+	xDateTime_GetSelBkColor    *syscall.Proc
+	xDateTime_SetSelBkColor    *syscall.Proc
+	xDateTime_GetDate          *syscall.Proc
+	xDateTime_SetDate          *syscall.Proc
+	xDateTime_GetTime          *syscall.Proc
+	xDateTime_SetTime          *syscall.Proc
+	xDateTime_EnableSplitSlash *syscall.Proc
 )
 
 func init() {
@@ -31,6 +32,11 @@ func init() {
 	xDateTime_SetDate = xcDLL.MustFindProc("XDateTime_SetDate")
 	xDateTime_GetTime = xcDLL.MustFindProc("XDateTime_GetTime")
 	xDateTime_SetTime = xcDLL.MustFindProc("XDateTime_SetTime")
+	xDateTime_EnableSplitSlash = xcDLL.MustFindProc("XDateTime_EnableSplitSlash")
+}
+
+func XDateTime_EnableSplitSlash(hEle HELE, bSlash bool) {
+	xDateTime_EnableSplitSlash.Call(uintptr(hEle), uintptr(BoolToBOOL(bSlash)))
 }
 
 /*

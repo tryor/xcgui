@@ -95,20 +95,32 @@ func XShapeText_SetText(hTextBlock HXCGUI, pName string) {
 	pOut 接收内容缓冲区.
 	nOutLen 缓冲区大小,字符数量为单位.
 */
-func XShapeText_GetText(hTextBlock HXCGUI, pOut *uint16, nOutLen int) {
-	xShapeText_GetText.Call(
-		uintptr(hTextBlock),
-		uintptr(unsafe.Pointer(pOut)),
-		uintptr(nOutLen))
+//func XShapeText_GetText(hTextBlock HXCGUI, pOut *uint16, nOutLen int) {
+//	xShapeText_GetText.Call(
+//		uintptr(hTextBlock),
+//		uintptr(unsafe.Pointer(pOut)),
+//		uintptr(nOutLen))
+//}
+
+////非官方api,功能同上, 更方便golang
+//func XShapeText_GetTextGo(hTextBlock HXCGUI) string {
+//	buf_szize := 256
+//	buf := make([]uint16, buf_szize)
+//	XShapeText_GetText(hTextBlock, &buf[0], buf_szize)
+
+//	return syscall.UTF16ToString(buf)
+//}
+
+func XShapeText_GetText(hTextBlock HXCGUI) string {
+	r, _, _ := xShapeText_GetText.Call(uintptr(hTextBlock))
+	return UintptrToString(r)
 }
 
-//非官方api,功能同上, 更方便golang
-func XShapeText_GetTextGo(hTextBlock HXCGUI) string {
-	buf_szize := 256
-	buf := make([]uint16, buf_szize)
-	XShapeText_GetText(hTextBlock, &buf[0], buf_szize)
-
-	return syscall.UTF16ToString(buf)
+func UintptrToString(v uintptr) string {
+	if v == 0 {
+		return ""
+	}
+	return syscall.UTF16ToString((*[1 << 29]uint16)(unsafe.Pointer(v))[0:])
 }
 
 /*
