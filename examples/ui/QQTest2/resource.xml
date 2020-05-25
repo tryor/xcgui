@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="gb2312" ?>
-<!--炫彩界面库-资源文件-->
+<!--鐐僵鐣岄潰搴�-璧勬簮鏂囦欢-->
 <resources>
     <type_image>
         <image name="ID_IMAGE_PopTipsTestIcon" value=".\image\PopTipsTestIcon.png" loadType="file" style="default" />
@@ -45,7 +45,10 @@
         <image name="ID_IMAGE_vip0" value=".\image\vip0.png" loadType="file" style="default" />
     </type_image>
     <type_id />
-    <type_font />
+    <type_font>
+        <font name="ID_FONT_1" value="Courier New" size="9" />
+        <font name="ID_FONT_2" value="榛戜綋" size="15" />
+    </type_font>
     <type_string />
     <type_color />
 </resources>

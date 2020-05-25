@@ -20,12 +20,17 @@ var (
 	xEdit_GetSelectText    *syscall.Proc
 	xEdit_EnableAutoSelAll *syscall.Proc
 
-	xEdit_GetCurRow      *syscall.Proc
-	xEdit_GetCurCol      *syscall.Proc
-	xEdit_SetCurPos      *syscall.Proc
-	xEdit_GetCurPos      *syscall.Proc
-	xEdit_SetDefaultText *syscall.Proc
-	xEdit_EnablePassword *syscall.Proc
+	xEdit_GetCurRow           *syscall.Proc
+	xEdit_GetCurCol           *syscall.Proc
+	xEdit_SetCurPos           *syscall.Proc
+	xEdit_GetCurPos           *syscall.Proc
+	xEdit_SetDefaultText      *syscall.Proc
+	xEdit_EnablePassword      *syscall.Proc
+	xEdit_EnableReadOnly      *syscall.Proc
+	xEdit_EnableAutoCancelSel *syscall.Proc
+
+	xEdit_InsertTextUser *syscall.Proc
+	xEdit_ClipboardPaste *syscall.Proc
 )
 
 func init() {
@@ -51,6 +56,17 @@ func init() {
 
 	xEdit_SetDefaultText = xcDLL.MustFindProc("XEdit_SetDefaultText")
 	xEdit_EnablePassword = xcDLL.MustFindProc("XEdit_EnablePassword")
+	xEdit_EnableReadOnly = xcDLL.MustFindProc("XEdit_EnableReadOnly")
+	xEdit_EnableAutoCancelSel = xcDLL.MustFindProc("XEdit_EnableAutoCancelSel")
+
+	xEdit_InsertTextUser = xcDLL.MustFindProc("XEdit_InsertTextUser")
+	xEdit_ClipboardPaste = xcDLL.MustFindProc("XEdit_ClipboardPaste")
+}
+
+func XEdit_EnableReadOnly(hEle HELE, b bool) {
+	xEdit_EnableReadOnly.Call(
+		uintptr(hEle),
+		uintptr(BoolToBOOL(b)))
 }
 
 func XEdit_GetCurPos(hEle HELE) int {
@@ -108,6 +124,12 @@ func XEdit_SetText(hEle HELE, text string) {
 		StringToUintPtr(text))
 }
 
+func XEdit_InsertTextUser(hEle HELE, text string) {
+	xEdit_InsertTextUser.Call(
+		uintptr(hEle),
+		StringToUintPtr(text))
+}
+
 func XEdit_SetDefaultText(hEle HELE, text string) {
 	xEdit_SetDefaultText.Call(
 		uintptr(hEle),
@@ -120,6 +142,10 @@ func XEdit_EnablePassword(hEle HELE, b bool) {
 		uintptr(BoolToBOOL(b)))
 }
 
+func XEdit_ClipboardPaste(hEle HELE) {
+	xEdit_ClipboardPaste.Call(uintptr(hEle))
+}
+
 func XEdit_EnableAutoWrap(hEle HELE, b bool) {
 	xEdit_EnableAutoWrap.Call(
 		uintptr(hEle),
@@ -129,6 +155,12 @@ func XEdit_EnableAutoWrap(hEle HELE, b bool) {
 //  XEdit_EnableMultiLine (HELE hEle, BOOL bEnable)
 func XEdit_EnableMultiLine(hEle HELE, b bool) {
 	xEdit_EnableMultiLine.Call(
+		uintptr(hEle),
+		uintptr(BoolToBOOL(b)))
+}
+
+func XEdit_EnableAutoCancelSel(hEle HELE, b bool) {
+	xEdit_EnableAutoCancelSel.Call(
 		uintptr(hEle),
 		uintptr(BoolToBOOL(b)))
 }

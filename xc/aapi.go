@@ -1,9 +1,12 @@
 package xc
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 	"runtime"
+	"sync"
+	"sync/atomic"
 	"syscall"
 	"unicode/utf8"
 	"unsafe"
@@ -48,10 +51,14 @@ var (
 	xRunXCGUI                *syscall.Proc
 	xExitXCGUI               *syscall.Proc
 
-	xC_SetTextRenderingHint   *syscall.Proc
-	xDraw_EnableSmoothingMode *syscall.Proc
+	xC_SetTextRenderingHint    *syscall.Proc
+	xDraw_EnableSmoothingMode  *syscall.Proc
+	xDraw_EnableWndTransparent *syscall.Proc
 
 	xC_CallUiThread *syscall.Proc
+
+	xC_PostMessage *syscall.Proc
+	xC_SendMessage *syscall.Proc
 )
 
 type POINT struct {
@@ -126,8 +133,11 @@ func init() {
 
 	xC_SetTextRenderingHint = xcDLL.MustFindProc("XC_SetTextRenderingHint")
 	xDraw_EnableSmoothingMode = xcDLL.MustFindProc("XDraw_EnableSmoothingMode")
+	xDraw_EnableWndTransparent = xcDLL.MustFindProc("XDraw_EnableWndTransparent")
 
 	xC_CallUiThread = xcDLL.MustFindProc("XC_CallUiThread")
+	xC_PostMessage = xcDLL.MustFindProc("XC_PostMessage")
+	xC_SendMessage = xcDLL.MustFindProc("XC_SendMessage")
 
 	ret, _, _ := xInitXCGUI.Call(StringToUintPtr("XCGUI Library For Go"))
 	// XCGUI的返回值: true 为 1 ，false 为 0
@@ -139,11 +149,43 @@ func init() {
 	XC_EnableDebugFile(false)
 }
 
+func callUiThread(id uint32) int {
+	f, ok := callUiThreadFuns.Load(id)
+	if ok {
+		callUiThreadFuns.Delete(id)
+		cf := f.(*callbackFunc)
+		return cf.f(cf.param)
+	} else {
+		log.Println("callUiThread, callbackFunc is nil")
+	}
+	return 0
+}
+
+var callUiThreadPtr = syscall.NewCallback(callUiThread)
+var callUiThreadFuns sync.Map
+var callUiThreadId uint32
+
+type callbackFunc struct {
+	f     func(data int) int
+	param int
+}
+
+type callUiThreadType = func(data int) int
+
 //int CALLBACK CallUiThread(int data)
-func XC_CallUiThread(f func(data int) int, lpParam int) int {
-	r, _, _ := xC_CallUiThread.Call(syscall.NewCallback(f), uintptr(lpParam))
+func XC_CallUiThread(f callUiThreadType, lpParam int) int {
+	id := atomic.AddUint32(&callUiThreadId, 1)
+	callUiThreadFuns.Store(id, &callbackFunc{f, lpParam})
+	r, _, _ := xC_CallUiThread.Call(callUiThreadPtr, uintptr(id))
+	//r, _, _ := xC_CallUiThread.Call(syscall.NewCallback(f), uintptr(lpParam))
 	return int(r)
 }
+
+//f func(data int) int
+// func XC_CallUiThread2(f uintptr, lpParam int) int {
+// 	r, _, _ := xC_CallUiThread.Call(f, uintptr(lpParam))
+// 	return int(r)
+// }
 
 /* 由于在init已经调用过了，这里只留个函数名字
 初始化界面库.
@@ -346,6 +388,21 @@ func XC_GetObjectByID(hWindow HWINDOW, nID int) HXCGUI {
 	return HXCGUI(ret)
 }
 
+//HWINDOW hWindow,
+func XC_PostMessage(hWindow HWINDOW, msg uint32, wParam uintptr, lParam uintptr) bool {
+	ret, _, _ := xC_PostMessage.Call(
+		uintptr(hWindow),
+		uintptr(msg), wParam, lParam)
+	return ret != NULL
+}
+
+func XC_SendMessage(hWindow HWINDOW, msg uint32, wParam uintptr, lParam uintptr) bool {
+	ret, _, _ := xC_SendMessage.Call(
+		uintptr(hWindow),
+		uintptr(msg), wParam, lParam)
+	return ret != NULL
+}
+
 /*
 获取资源ID整型值.
 
@@ -462,6 +519,10 @@ func XDraw_EnableSmoothingMode(hDraw HDRAW, bEnable bool) {
 	xDraw_EnableSmoothingMode.Call(uintptr(hDraw), uintptr(BoolToBOOL(bEnable)))
 }
 
+func XDraw_EnableWndTransparent(hDraw HDRAW, bEnable bool) {
+	xDraw_EnableWndTransparent.Call(uintptr(hDraw), uintptr(BoolToBOOL(bEnable)))
+}
+
 func FullPath(path string) (p string) {
 	p, _ = filepath.Abs(path)
 	return
@@ -480,15 +541,15 @@ func CallBack(pFun interface{}) uintptr {
 	return syscall.NewCallback(pFun)
 }
 
-func CallBackGo(pFunc func()) uintptr {
-	var pfunc = func() int {
-		pFunc()
+// func CallBackGo(pFunc func()) uintptr {
+// 	var pfunc = func() int {
+// 		pFunc()
 
-		return 0
-	}
+// 		return 0
+// 	}
 
-	return syscall.NewCallback(pfunc)
-}
+// 	return syscall.NewCallback(pfunc)
+// }
 
 // BOOL值转换
 func BoolToBOOL(value bool) BOOL {

@@ -77,7 +77,7 @@ var (
 
 	xWnd_SetShadowInfo *syscall.Proc
 	xWnd_Move          *syscall.Proc
-	//xWnd_SetWindowRect *syscall.Proc
+	xWnd_EnableLayout  *syscall.Proc
 )
 
 func init() {
@@ -151,8 +151,12 @@ func init() {
 
 	xWnd_SetShadowInfo = xcDLL.MustFindProc("XWnd_SetShadowInfo")
 	xWnd_Move = xcDLL.MustFindProc("XWnd_Move")
-
+	xWnd_EnableLayout = xcDLL.MustFindProc("XWnd_EnableLayout")
 	//xWnd_SetWindowRect = xcDLL.MustFindProc("XWnd_SetWindowRect")
+}
+
+func XWnd_EnableLayout(hWindow HWINDOW, b bool) {
+	xWnd_EnableLayout.Call(uintptr(hWindow), uintptr(BoolToBOOL(b)))
 }
 
 // HWINDOW  hWindow,

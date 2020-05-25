@@ -190,7 +190,7 @@ const (
 
 /*
 元素事件
-	XE_PGRID_VALUE_CHANGE   161   属性网格元素 项值改变事件
+	XE_PGRID_VALUE_CHANGE   151   属性网格元素 项值改变事件
 	XE_RICHEDIT_CHANGE   162   富文本元素 用户修改内容事件,只有当用户操作时才会触发,需要开启后有效, XRichEdit_EnableEvent_XE_RICHEDIT_CHANGE()； XRichEdit_SetText()、XRichEdit_InsertString()不会触发此事件
 	XE_TABBAR_SELECT   221   TabBar标签按钮选择改变事件
 	XE_TABBAR_DELETE   222   TabBar标签按钮删除事件
@@ -200,8 +200,8 @@ const (
 	XE_DATETIME_EXIT_MONTHCAL   243   日期时间元素,弹出的月历卡片退出事件, 未开放
 */
 const (
-	XE_PGRID_VALUE_CHANGE      = 161
-	XE_RICHEDIT_CHANGE         = 162
+	XE_PGRID_VALUE_CHANGE      = 151
+	XE_RICHEDIT_CHANGE         = 161
 	XE_TABBAR_SELECT           = 221
 	XE_TABBAR_DELETE           = 222
 	XE_MONTHCAL_CHANGE         = 231

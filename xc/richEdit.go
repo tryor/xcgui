@@ -47,6 +47,9 @@ var (
 	xRichEdit_ClipboardCut                   *syscall.Proc
 	xRichEdit_ClipboardCopy                  *syscall.Proc
 	xRichEdit_ClipboardPaste                 *syscall.Proc
+
+	xRichEdit_SetDefaultText       *syscall.Proc
+	xRichEdit_EnableVerticalCenter *syscall.Proc
 )
 
 func init() {
@@ -90,6 +93,16 @@ func init() {
 	xRichEdit_ClipboardCut = xcDLL.MustFindProc("XRichEdit_ClipboardCut")
 	xRichEdit_ClipboardCopy = xcDLL.MustFindProc("XRichEdit_ClipboardCopy")
 	xRichEdit_ClipboardPaste = xcDLL.MustFindProc("XRichEdit_ClipboardPaste")
+
+	xRichEdit_SetDefaultText = xcDLL.MustFindProc("XRichEdit_SetDefaultText")
+	xRichEdit_EnableVerticalCenter = xcDLL.MustFindProc("XRichEdit_EnableVerticalCenter")
+
+}
+
+func XRichEdit_SetDefaultText(hEle HELE, text string) {
+	xRichEdit_SetDefaultText.Call(
+		uintptr(hEle),
+		StringToUintPtr(text))
 }
 
 /*
@@ -280,13 +293,25 @@ func XRichEdit_SetTextInt(hEle HELE, nVaule int) {
 返回:
 	返回内容长度,不包含空终止符.
 */
-func XRichEdit_GetText(hEle HELE, pOut *uint16, lenText int) int {
-	ret, _, _ := xRichEdit_GetText.Call(
-		uintptr(hEle),
-		uintptr(unsafe.Pointer(pOut)),
-		uintptr(lenText))
+// func XRichEdit_GetText(hEle HELE, pOut *uint16, lenText int) int {
+// 	ret, _, _ := xRichEdit_GetText.Call(
+// 		uintptr(hEle),
+// 		uintptr(unsafe.Pointer(pOut)),
+// 		uintptr(lenText))
 
-	return int(ret)
+// 	return int(ret)
+// }
+
+func XRichEdit_GetText(hEle HELE) string {
+	size := XRichEdit_GetTextLength(hEle)
+	if size <= 0 {
+		return ""
+	}
+	pOut := make([]uint16, size+1)
+	r, _, _ := xRichEdit_GetText.Call(
+		uintptr(hEle),
+		uintptr(unsafe.Pointer(&pOut[0])), uintptr(len(pOut)))
+	return syscall.UTF16ToString(pOut[:r])
 }
 
 func XRichEdit_GetTextGo(hEle HELE) (str string, lenText int) {
@@ -392,6 +417,12 @@ func XRichEdit_EnableMultiLine(hEle HELE, bEnable bool) {
 */
 func XRichEdit_EnablePassword(hEle HELE, bEnable bool) {
 	xRichEdit_EnablePassword.Call(
+		uintptr(hEle),
+		uintptr(BoolToBOOL(bEnable)))
+}
+
+func XRichEdit_EnableVerticalCenter(hEle HELE, bEnable bool) {
+	xRichEdit_EnableVerticalCenter.Call(
 		uintptr(hEle),
 		uintptr(BoolToBOOL(bEnable)))
 }
@@ -546,7 +577,7 @@ func XRichEdit_GetRowLength(hEle HELE, iRow int) int {
 返回:
 	返回内容长度,字符为单位,不包含空终止符.
 */
-func XRichEdit_GetSelectText(hEle HELE, pOut *uint16, reLen int) int {
+func XRichEdit_GetSelectText2(hEle HELE, pOut *uint16, reLen int) int {
 	ret, _, _ := xRichEdit_GetSelectText.Call(
 		uintptr(hEle),
 		uintptr(unsafe.Pointer(pOut)),
@@ -554,6 +585,25 @@ func XRichEdit_GetSelectText(hEle HELE, pOut *uint16, reLen int) int {
 
 	return int(ret)
 }
+
+func XRichEdit_GetSelectText(hEle HELE) string {
+	size := 255
+	pOut := make([]uint16, size+1)
+	r, _, _ := xRichEdit_GetSelectText.Call(
+		uintptr(hEle),
+		uintptr(unsafe.Pointer(&pOut[0])), uintptr(len(pOut)))
+	return syscall.UTF16ToString(pOut[:r])
+}
+
+// func XRichEdit_GetSelectText(hEle HELE, pOut *uint16, reLen int) int {
+
+// 	ret, _, _ := xRichEdit_GetSelectText.Call(
+// 		uintptr(hEle),
+// 		uintptr(unsafe.Pointer(pOut)),
+// 		uintptr(reLen))
+
+// 	return int(ret)
+// }
 
 /*
 获取选择内容位置.
